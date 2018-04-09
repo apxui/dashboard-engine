@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 	selector: 'app-root',
 	template: `
         <nav class="navbar navbar-expand sticky-top navbar-dark bg-primary d-flex justify-content-between">
-            <a class="navbar-brand" href="#">Dashboard Engine</a>
+            <a class="navbar-brand" href="#"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard Engine</a>
 
             <ul class="navbar-nav">
                 <li class="nav-item active">
