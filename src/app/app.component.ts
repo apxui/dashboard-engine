@@ -5,7 +5,7 @@ import { main } from './chart-tree/chart-tree';
 	selector: 'app-root',
 	template: `
         <h1>Dashboard Engine</h1>
-		<app-test [id]="'test1'"></app-test>
+		<app-test></app-test>
 	`
 })
 export class AppComponent {

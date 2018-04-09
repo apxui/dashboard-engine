@@ -1,23 +1,22 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import * as echarts from 'echarts';
 
 @Component({
 	selector: 'app-test',
 	template: `
 		Test
-		<div [id]="id" style="width: 600px;height:400px;"></div>
+		<div echarts [options]="options"></div>
+		<div echarts [options]="options2"></div>
 	`
 })
-export class TestComponent implements AfterViewInit {
-	@Input() id: string;
-
-	constructor() {}
-
-	ngAfterViewInit(): void {
-		let myChart = echarts.init(document.getElementById(this.id));
+export class TestComponent implements OnInit {
+	options: any;
+	options2: any;
+	
+	ngOnInit(): void {
 
 		// 指定图表的配置项和数据
-		let option = {
+		this.options = {
 			title: {
 				text: 'ECharts 入门示例'
 			},
@@ -36,7 +35,45 @@ export class TestComponent implements AfterViewInit {
 			}]
 		};
 
-		// 使用刚指定的配置项和数据显示图表。
-		myChart.setOption(option);
+		let data = [];
+
+		for (let i = 0; i <= 360; i++) {
+			let t = i / 180 * Math.PI;
+			let r = Math.sin(2 * t) * Math.cos(2 * t);
+			data.push([r, i]);
+		}
+
+		this.options2 = {
+			title: {
+				text: '极坐标双数值轴'
+			},
+			legend: {
+				data: ['line']
+			},
+			polar: {
+				center: ['50%', '54%']
+			},
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'cross'
+				}
+			},
+			angleAxis: {
+				type: 'value',
+				startAngle: 0
+			},
+			radiusAxis: {
+				min: 0
+			},
+			series: [{
+				coordinateSystem: 'polar',
+				name: 'line',
+				type: 'line',
+				showSymbol: false,
+				data: data
+			}],
+			animationDuration: 2000
+		};
 	}
 }
