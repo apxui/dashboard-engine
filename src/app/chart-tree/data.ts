@@ -1,8 +1,4 @@
-export enum Dimension {
-	Value = 1,
-	Time,
-	StaticProperty
-}
+import { Dimension } from './entity';
 
 export let rawData: Array<any> = [
 		{
@@ -67,7 +63,7 @@ export let metaData: Array<any> = [
 		}
 	];
 
-export let reduceDimensionsInOrder: Array<any> = [
+export let reduceSeq: Array<any> = [
 	{
 		name: 'type',
 		dimension: Dimension.StaticProperty
