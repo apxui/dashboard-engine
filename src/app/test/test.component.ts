@@ -1,22 +1,24 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import * as echarts from 'echarts';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'app-test',
 	template: `
-		Test
-		<div echarts [options]="options"></div>
-		<div echarts [options]="options2"></div>
+        Test
+        <div echarts [options]="options1"></div>
+        <div echarts [options]="options2"></div>
 	`
 })
 export class TestComponent implements OnInit {
-	options: any;
+	options1: any;
 	options2: any;
 	
 	ngOnInit(): void {
+		this.draw1();
+		this.draw2();
+	}
 
-		// 指定图表的配置项和数据
-		this.options = {
+	draw1(): void {
+		this.options1 = {
 			title: {
 				text: 'ECharts 入门示例'
 			},
@@ -34,7 +36,9 @@ export class TestComponent implements OnInit {
 				data: [5, 20, 36, 10, 10, 20]
 			}]
 		};
+	}
 
+	draw2(): void {
 		let data = [];
 
 		for (let i = 0; i <= 360; i++) {
