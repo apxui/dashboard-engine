@@ -8,7 +8,7 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "1",
-        salary: 100
+        house: 1
     },
     {
         name: "Jim",
@@ -16,7 +16,7 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "2",
-        salary: 100
+        house: 1
     },
     {
         name: "David",
@@ -24,7 +24,7 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "3",
-        salary: 100
+        house: 1
     }, 
     {
         name: "Grace",
@@ -32,7 +32,7 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "China",
         identityNo: "4",
-        salary: 100
+        house: 1
     },
     {
         name: "James",
@@ -40,7 +40,7 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "American",
         identityNo: "5",
-        salary: 100
+        house: 1
     },
     {
         name: "Green",
@@ -48,7 +48,7 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "6",
-        salary: 100
+        house: 1
     },
     {
         name: "Scott",
@@ -56,7 +56,7 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "China",
         identityNo: "7",
-        salary: 100
+        house: 1
     },
     {
         name: "Park",
@@ -64,7 +64,7 @@ export let rawData: Array<any> = [
         birthYear: "1987",
         country: "American",
         identityNo: "8",
-        salary: 100
+        house: 1
     },
     {
         name: "Helen",
@@ -72,7 +72,7 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "9",
-        salary: 100
+        house: 1
     },
     {
         name: "Lucas",
@@ -80,7 +80,7 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "China",
         identityNo: "10",
-        salary: 100
+        house: 1
     },
     {
         name: "Lily",
@@ -88,7 +88,7 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "11",
-        salary: 100
+        house: 1
     },
     {
         name: "Clark",
@@ -96,7 +96,7 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "12",
-        salary: 100
+        house: 1
     },
     {
         name: "William",
@@ -104,7 +104,7 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "American",
         identityNo: "13",
-        salary: 100
+        house: 1
     },
     {
         name: "Shane",
@@ -112,7 +112,7 @@ export let rawData: Array<any> = [
         birthYear: "1986",
         country: "China",
         identityNo: "14",
-        salary: 100
+        house: 1
     },
     {
         name: "Bing",
@@ -120,7 +120,7 @@ export let rawData: Array<any> = [
         birthYear: "1986",
         country: "American",
         identityNo: "15",
-        salary: 100
+        house: 1
     },
     {
         name: "Winston",
@@ -128,7 +128,7 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "16",
-        salary: 100
+        house: 1
     },
     {
         name: "Nancy",
@@ -136,7 +136,7 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "China",
         identityNo: "17",
-        salary: 100
+        house: 1
     },
     {
         name: "Maggie",
@@ -144,7 +144,7 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "American",
         identityNo: "18",
-        salary: 100
+        house: 1
     },
     {
         name: "Lisa",
@@ -152,7 +152,7 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "19",
-        salary: 100
+        house: 1
     },
     {
         name: "Cally",
@@ -160,7 +160,7 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "20",
-        salary: 100
+        house: 1
     },
     {
         name: "Arnold",
@@ -168,7 +168,7 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "21",
-        salary: 100
+        house: 1
     },
     {
         name: "Andrew",
@@ -176,7 +176,7 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "22",
-        salary: 100
+        house: 1
     }, 
     {
         name: "Fiona",
@@ -184,7 +184,7 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "China",
         identityNo: "23",
-        salary: 100
+        house: 1
     },
     {
         name: "Cliff",
@@ -192,7 +192,7 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "American",
         identityNo: "24",
-        salary: 100
+        house: 1
     },
     {
         name: "Devin",
@@ -200,7 +200,7 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "25",
-        salary: 100
+        house: 1
     },
     {
         name: "Edward",
@@ -208,7 +208,7 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "China",
         identityNo: "26",
-        salary: 100
+        house: 1
     },
     {
         name: "Eric",
@@ -216,7 +216,7 @@ export let rawData: Array<any> = [
         birthYear: "1987",
         country: "American",
         identityNo: "27",
-        salary: 100
+        house: 1
     },
     {
         name: "Helen",
@@ -224,7 +224,7 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "28",
-        salary: 100
+        house: 1
     },
     {
         name: "Harry",
@@ -232,7 +232,7 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "China",
         identityNo: "29",
-        salary: 100
+        house: 1
     },
     {
         name: "Jessie",
@@ -240,7 +240,7 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "30",
-        salary: 100
+        house: 1
     },
     {
         name: "Ivan",
@@ -248,7 +248,7 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "31",
-        salary: 100
+        house: 1
     },
     {
         name: "Mick",
@@ -256,7 +256,7 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "American",
         identityNo: "32",
-        salary: 100
+        house: 1
     },
     {
         name: "Norman",
@@ -264,7 +264,7 @@ export let rawData: Array<any> = [
         birthYear: "1986",
         country: "China",
         identityNo: "33",
-        salary: 100
+        house: 1
     },
     {
         name: "Nomic",
@@ -272,7 +272,7 @@ export let rawData: Array<any> = [
         birthYear: "1986",
         country: "American",
         identityNo: "34",
-        salary: 100
+        house: 1
     },
     {
         name: "Rod",
@@ -280,7 +280,7 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "35",
-        salary: 100
+        house: 1
     },
     {
         name: "Betty",
@@ -288,7 +288,7 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "China",
         identityNo: "36",
-        salary: 100
+        house: 1
     },
     {
         name: "Celia",
@@ -296,7 +296,7 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "American",
         identityNo: "37",
-        salary: 100
+        house: 1
     },
     {
         name: "Hilary",
@@ -304,7 +304,7 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "38",
-        salary: 100
+        house: 1
     },
 ];
 export let metaData: Array<any> = [
@@ -325,7 +325,7 @@ export let metaData: Array<any> = [
         dimension: Dimension.StaticProperty
     }, 
     {
-        name: "salary",
+        name: "house",
         dimension: Dimension.Value
     }
 ];
