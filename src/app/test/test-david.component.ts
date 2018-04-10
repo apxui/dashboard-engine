@@ -36,6 +36,6 @@ export class TestDavidComponent {
 	}
 
 	buildPieCharts(treeNodeData): void {
-		this.lineOption = ChartsUtil.convertChartNodeToNestedPieNode(treeNodeData);
+		this.lineOption = ChartsUtil.convertChartNodeToPieNode(treeNodeData);
 	}
 }
