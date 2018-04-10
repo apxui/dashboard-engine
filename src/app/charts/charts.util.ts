@@ -207,7 +207,7 @@ export class ChartsUtil {
 	public static convertChartNodeToTreeNode(data: ChartNode): any {
 		let result: any = {};
 		result.name = data.name;
-		result.uid = 1;
+		result.uid = data.id;
 		if (data.children && data.children.length > 0) {
 			result.children = [];
 			data.children.forEach((e: ChartNode) => {
