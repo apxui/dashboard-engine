@@ -32,7 +32,12 @@ export class AppComponent {
 		let mainTree: ChartTree = new ChartTree();
 		let mainTreeData: any = mainTree.buildAndGetRootnode(rawData, metaData, reduceSeq);
 		let mainTreeOption: any = ChartsUtil.convertToTreeOption(mainTreeData);
-		this.treeOption = mainTreeOption;
+		this.treeOption = {
+			option: mainTreeOption,
+			onTreeClickHandler: (treeNodeData: any) => {
+				console.log(treeNodeData);
+			}
+		};
 	}
 }
 
