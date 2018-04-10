@@ -2,6 +2,7 @@ import { ChartNode } from "../chart-tree/entity";
 
 export class ChartsUtil {
     public static convertToTreeOption(data: ChartNode): any {
+        let treeData: any = ChartsUtil.convertChartNodeToTreeNode(data);
         return {
             tooltip: {
                 trigger: 'item',
@@ -11,7 +12,7 @@ export class ChartsUtil {
                 {
                     type: 'tree',
     
-                    data: [data],
+                    data: [treeData],
     
                     top: '1%',
                     left: '7%',
@@ -114,6 +115,19 @@ export class ChartsUtil {
                 }
             ]
         };
+    }
+    public static convertChartNodeToTreeNode(data: ChartNode): any {
+        let result: any = {};
+        result.name = data.name;
+        if (data.children && data.children.length > 0) {
+            result.children = [];
+            data.children.forEach((e: ChartNode) => {
+                result.children.push(ChartsUtil.convertChartNodeToTreeNode(e));
+            });
+        } else {
+            result.value = data.value;
+        }
+        return result;
     }
     
 }
