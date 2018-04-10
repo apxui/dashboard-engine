@@ -594,11 +594,11 @@ export let metaData: Array<any> = [
 
 export let reduceSeq: Array<any> = [
     {
-        name: "PortfolioType",
+        name: "PortfolioStatus",
         dimension: Dimension.StaticProperty
     },
     {
-        name: "PortfolioStatus",
+        name: "PortfolioType",
         dimension: Dimension.StaticProperty
     },
     {

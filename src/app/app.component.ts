@@ -17,13 +17,17 @@ import { rawData, metaData, reduceSeq } from './data/portfolio.data';
         </nav>
         
 		<div class="container-fluid">
-			<chart-tree [options]="treeOption"></chart-tree>
-			<app-test></app-test>
-        </div>
+			<base-chart [options]="treeOption"></base-chart>
+			<div  *ngFor="let d of chartList">
+				<base-chart [options]="d.chartOption"></base-chart>
+		</div>
+		</div>
+		
 	`
 })
 export class AppComponent {
 	treeOption: any;
+	chartList: ChartObject[] = null;
 	constructor() {
 		this.buildMainTree();
 
@@ -31,13 +35,32 @@ export class AppComponent {
 	buildMainTree(): void {
 		let mainTree: ChartTree = new ChartTree();
 		let mainTreeData: any = mainTree.buildAndGetRootnode(rawData, metaData, reduceSeq);
+
 		let mainTreeOption: any = ChartsUtil.convertToTreeOption(mainTreeData);
 		this.treeOption = {
 			option: mainTreeOption,
 			onTreeClickHandler: (treeNodeData: any) => {
 				console.log(treeNodeData);
+				this._createBarChart();
 			}
 		};
 	}
+	_createBarChart(): void {
+		if (!this.chartList) {
+			this.chartList = [];
+		}
+		this.chartList.push(
+			{
+				chartOption: {
+					option: ChartsUtil.convertToBarOption(null)
+				},
+				chartType: 'bar'
+			});
+	}
+}
+
+export class ChartObject {
+	chartType: string;
+	chartOption: any;
 }
 

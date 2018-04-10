@@ -1,34 +1,25 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-    selector: 'chart-tree',
+    selector: 'base-chart',
     template: `
         <div echarts [options]="_options.option" (chartClick)="onChartClick($event)"></div>
 	`
 })
-export class TreeComponent implements OnInit {
+export class BaseChartComponent {
     _options: any;
-    @Input() set options(optionValue: TreeOption) {
+    @Input() set options(optionValue: BaseChartOption) {
         this._options = optionValue;
+        console.log('basechart', this._options);
+        
     }
-
-    ngOnInit(): void {
-        console.log(this.options);
-    }
-
     onChartClick(e: any): void{
         if (this._options && this._options.onTreeClickHandler) {
             this._options.onTreeClickHandler(e.data);
         }
     }
 }
-export class TreeOption {
+export class BaseChartOption {
     option: any;
-    onTreeClickHandler: (treeNodeData: any) => {};
-}
-export class TreeData {
-    name: string;
-    children: TreeData[];
-    collapsed: boolean;
-    value: any;
+    onTreeClickHandler?: (nodeData: any) => {};
 }
