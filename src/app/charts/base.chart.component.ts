@@ -10,7 +10,6 @@ export class BaseChartComponent {
     _options: any;
     @Input() set options(optionValue: BaseChartOption) {
         this._options = optionValue;
-        console.log('basechart', this._options);
         
     }
     onChartClick(e: any): void{
