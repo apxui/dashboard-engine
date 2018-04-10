@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ChartsUtil } from './charts/charts.util';
+import { ChartTree } from './chart-tree/chart-tree';
+import { rawData, metaData, reduceSeq } from './chart-tree/data';
 
 @Component({
 	selector: 'app-root',
@@ -13,13 +16,23 @@ import { Component } from '@angular/core';
             </ul>
         </nav>
         
-        <div class="container-fluid">
-	        <app-test></app-test>
+		<div class="container-fluid">
+			<chart-tree [options]="treeOption"></chart-tree>
+			<app-test></app-test>
         </div>
 	`
 })
 export class AppComponent {
+	treeOption: any;
 	constructor() {
+		this.buildMainTree();
 
 	}
+	buildMainTree(): void {
+		let mainTree: ChartTree = new ChartTree();
+		let mainTreeData: any = mainTree.buildAndGetRootnode(rawData, metaData, reduceSeq);
+		let mainTreeOption: any = ChartsUtil.convertToTreeOption(mainTreeData);
+		this.treeOption = mainTreeOption;
+	}
 }
+

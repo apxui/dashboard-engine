@@ -2,7 +2,7 @@ import {rawData, metaData, reduceSeq} from './data';
 import { ChartNode, Property, Dimension, ChartData} from './entity';
 
 
-class ChartTree {
+export class ChartTree {
 	private _rootNode: ChartNode;
 	private _reduceSeq: Array<Property>;
 	private _rawData: Array<any>;
