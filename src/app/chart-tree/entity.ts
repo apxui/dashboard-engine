@@ -5,8 +5,11 @@ export enum Dimension {
 }
 
 export enum ChartType {
-	LineChart = 1,
-	PieChart
+	Line = 1,
+	Pie,
+	Bar,
+	multiLine,
+	multiBar
 }
 
 export class Property {

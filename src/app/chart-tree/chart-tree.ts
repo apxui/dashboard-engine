@@ -1,4 +1,5 @@
-import { ChartNode, Property, Dimension } from './entity';
+import { ChartNode, Property, Dimension, ChartType } from './entity';
+import { ChartTypeDecider } from './chart-type';
 
 
 export class ChartTree {
@@ -8,12 +9,15 @@ export class ChartTree {
 	private _metaData: Array<any>;
 
 	private _valuePropertyName: string;
+	private _typeDecider: ChartTypeDecider = new ChartTypeDecider();
 
 	public buildAndGetRootnode(rawdata: Array<any>, metadata: Array<any>, reduceseq: Array<Property>): ChartNode {
 		this._rawData = rawdata;
 		this._metaData = metadata;
 		this._reduceSeq = reduceseq;
+		this._typeDecider.decideType(reduceseq);
 		this.buildTree();
+		console.log(this._rootNode);
 		return this._rootNode;
 	}
 
