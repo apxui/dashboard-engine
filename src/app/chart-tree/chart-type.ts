@@ -1,4 +1,4 @@
-import { ChartType, Property } from './entity';
+import { ChartType, Property, TypeResult } from './entity';
 
 export class ChartTypeDecider {
     private _reduceSeq: Array<Property>
@@ -10,7 +10,7 @@ export class ChartTypeDecider {
         '32': [ChartType.multiLine]
     }
 
-    public decideType(reduceSeq: Array<Property>): any {
+    public decideType(reduceSeq: Array<Property>): TypeResult {
         this._reduceSeq = reduceSeq;
         let reduceSeqStr: string = this.convertReduceSeqToStr();
         if (this._dimensionChartTable[reduceSeqStr]) {
