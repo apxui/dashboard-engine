@@ -6,3 +6,9 @@ export interface IGridStackItem {
 	CardId: string;
 	Content: string;
 }
+
+export interface IGridStackItemResizeEvent {
+	newHeight: number;
+	newWidth: number;
+	CardId: string;
+}

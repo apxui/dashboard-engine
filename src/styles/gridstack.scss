@@ -1,16 +1,12 @@
 .grid-stack {
+	
 	.grid-stack-item {
-		padding: 5px;
 		
 		.grid-stack-item-content {
-			border: 1px solid $secondary;
+			// border: 1px solid $secondary;
 			border-radius: 5px;
+			box-shadow: rgba(0, 0, 0, 0.35) 0 2px 2px 0;
 			overflow: hidden;
-			display: flex;
-			
-			> *:first-child {
-				flex: 1;
-			}
 		}
 	}
 }

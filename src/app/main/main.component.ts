@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 	selector: 'app-main',
 	styleUrls: ['./main.component.scss'],
 	template: `
-		<div class="sticky-top">
+		<div class="sticky-top mb-2">
             <div class="container-fluid">
                 <div class="row col-12">
 	                <h6>Begin with a data type:</h6>
@@ -17,6 +17,13 @@ import { Component } from '@angular/core';
 	                </div>
                 </div>
             </div>
+		</div>
+		
+		<div>
+            <gridStack
+                    [w]="12"
+                    [animate]="true"
+            ></gridStack>
 		</div>
 	`
 })
