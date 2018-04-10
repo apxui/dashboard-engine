@@ -9,8 +9,7 @@ export enum ChartType {
 	Pie,
 	Bar,
 	multiLine,
-	multiBar,
-	NestedPie
+	multiBar
 }
 
 export class Property {
