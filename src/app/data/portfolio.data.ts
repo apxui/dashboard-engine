@@ -1,4 +1,4 @@
-import { dimension, Dimension: } from "../chart-tree/entity";
+import { Dimension} from "../chart-tree/entity";
 
 
 export let rawData: Array<any> = [
