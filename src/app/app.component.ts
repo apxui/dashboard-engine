@@ -12,7 +12,10 @@ import { Component } from '@angular/core';
                 </li>
 	            <li class="nav-item">
                     <a class="nav-link" [routerLink]="'test_grace'">Test Grace</a>
-	            </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="'test_david'">Test David</a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="https://github.com/apxui/dashboard-engine" target="_blank"><i class="fab fa-github fa-lg fa-fw fa-spin mr-1"></i>Follow us on GitHub</a>
                 </li>
