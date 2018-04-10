@@ -1,4 +1,3 @@
-import {rawData, metaData, reduceSeq} from './data';
 import { ChartNode, Property, Dimension, ChartData} from './entity';
 
 
@@ -35,22 +34,24 @@ export class ChartTree {
 		queue.push(this._rootNode);
 		while (queue.length !== 0) {
 			let chartNode: ChartNode = queue.shift();
-			let groupDatas: Array<any> = chartNode.groupedDatas;
+			let groupDatas: any = chartNode.groupedDatas;
 			let children: Array<ChartNode> = [];
-			for (let p in chartNode.groupedDatas) {
-				if (chartNode.layer + 1 < this._reduceSeq.length) {
-					let newNode: ChartNode = this.buildChartNode(groupDatas[p], chartNode.layer + 1, p);
-					children.push(newNode);
-					queue.push(newNode);
+			if (groupDatas) {
+				for (let p in groupDatas) {
+					if (chartNode.groupedDatas[p]) {
+						let newNode: ChartNode = this.buildChartNode(groupDatas[p], chartNode.layer + 1, p);
+						children.push(newNode);
+						queue.push(newNode);
+					}
 				}
-			}
+			}	
 			chartNode.children = children;
 		}
 	}
 
 	//find the value dimension because it need to aggregate the value for each group after grouped.
 	private findValueDimension(): void {
-		metaData.forEach((prop: Property) => {
+		this._metaData.forEach((prop: Property) => {
 			if (prop.dimension === Dimension.Value) {
 				this._valuePropertyName = prop.name;
 			}
@@ -72,14 +73,18 @@ export class ChartTree {
 
 	//build chart node's every property respectively, especially the "chartDatas"
 	private buildChartNode(objs: Array<any>, layer: number, groupKey: string): ChartNode {
-		let prop: string = this._reduceSeq[layer].name;
-		if (!prop || prop.trim() === "") {
-			return null;
-		}
-
-		let groupRst: Array<any> = this.group(objs, prop);
-
 		let chartNode: ChartNode = new ChartNode();
+
+		if (layer < this._reduceSeq.length) {
+			let prop: string = this._reduceSeq[layer].name;
+			if (!prop || prop.trim() === "") {
+				return null;
+			}
+			let groupRst: Array<any> = this.group(objs, prop);
+			
+			//assign groupedDatas which is needed when building tree;
+			chartNode.groupedDatas = groupRst;
+		}
 
 		//assign layer
 		chartNode.layer = layer;
@@ -88,10 +93,7 @@ export class ChartTree {
 		chartNode.name = groupKey;
 
 		//assign chartDatas
-		chartNode.chartDatas = this.buildChartDatas(groupRst);
-
-		//assign groupedDatas which is needed when building tree;
-		chartNode.groupedDatas = groupRst;
+		chartNode.chartDatas = this.buildChartDatas(chartNode.groupedDatas);
 		
 		return chartNode;
 	}

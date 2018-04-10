@@ -588,26 +588,21 @@ export let metaData: Array<any> = [
     },
     {
         name: "PortfolioID",
-        dimension: Dimension.Value
+        dimension: Dimension.StaticProperty
     }
 ];
 
 export let reduceSeq: Array<any> = [
-	{
-        name: "PortfolioCode",
-        dimension: Dimension.StaticProperty
-    },
-    {
-        name: "TotalMarketValueInGlobalCurrency",
-        dimension: Dimension.Value
-    },
     {
         name: "PortfolioType",
         dimension: Dimension.StaticProperty
     },
     {
-        name: "StartDate",
-        dimension: Dimension.Time
+        name: "PortfolioStatus",
+        dimension: Dimension.StaticProperty
+    },
+    {
+        name: "PortfolioCode",
+        dimension: Dimension.StaticProperty
     }
-
 ];

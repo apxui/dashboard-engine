@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ChartsUtil } from './charts/charts.util';
 import { ChartTree } from './chart-tree/chart-tree';
-import { rawData, metaData, reduceSeq } from './chart-tree/data';
+import { rawData, metaData, reduceSeq } from './data/portfolio.data';
 
 @Component({
 	selector: 'app-root',
