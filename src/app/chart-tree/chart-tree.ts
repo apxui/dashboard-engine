@@ -2,40 +2,34 @@ import {rawData, metaData, reduceSeq} from './data';
 import { ChartNode, Property, Dimension, ChartData} from './entity';
 
 
-class ChartTree {
+export class ChartTree {
 	private _rootNode: ChartNode;
 	private _reduceSeq: Array<Property>;
 	private _rawData: Array<any>;
 	private _metaData: Array<any>;
 
 	private _valuePropertyName: string;
-	private _id: number = 0;
 
-	//getter and setter
-	public get rootNode(): ChartNode {
+	public buildAndGetRootnode(rawdata: Array<any>, metadata: Array<any>, reduceseq: Array<Property>): ChartNode {
+		this._rawData = rawdata;
+		this._metaData = metadata;
+		this._reduceSeq = reduceseq;
+		this.buildTree();
 		return this._rootNode;
 	}
 
-	public set reduceSeq(reduceseq: Array<Property>) {
-		this._reduceSeq = reduceseq;
-	}
-
-	public set rawData(rawdata: Array<any>) {
-		this._rawData = rawdata;
-	}
-
-	public set metaData(metadata: Array<any>) {
-		this._metaData = metadata;
-	}
-
 	// the process to build a tree
-	public buildTree(): void {
-		//1. validate
-
-		//2. find value dimension, used in building chartdatas
+	private buildTree(): void {
+		//find value dimension, used in building chartdatas
 		this.findValueDimension();
 
 		//use a queue to build the tree
+		this.buildTreeByQueue();
+	}
+
+
+	//use a queue to build the tree
+	private buildTreeByQueue(): void {
 		let queue: Array<ChartNode> = [];
 		this._rootNode = this.buildChartNode(this._rawData, 0, "Root");
 		queue.push(this._rootNode);
@@ -52,10 +46,7 @@ class ChartTree {
 			}
 			chartNode.children = children;
 		}
-		
-		console.log(this._rootNode);
 	}
-
 
 	//find the value dimension because it need to aggregate the value for each group after grouped.
 	private findValueDimension(): void {
@@ -66,9 +57,11 @@ class ChartTree {
 		});
 	}
 
+	//p
+
 	//divide objs into groups according to property.
-	private group(objs: Array<any>, prop: string): Array<any> {
-		let groupRst: Array<any> =  objs.reduce((groups: any, item: any) => {
+	private group(objs: Array<any>, prop: string): any {
+		let groupRst: any =  objs.reduce((groups: any, item: any) => {
 			const val: any = item[prop];
 			groups[val] = groups[val] || [];
 			groups[val].push(item);
@@ -91,37 +84,32 @@ class ChartTree {
 		//assign layer
 		chartNode.layer = layer;
 
-		//assign id
-		chartNode.id = this._id++;
-
 		//assign name
-		chartNode.name = "Property:" + groupKey + " Group by: " + prop;
+		chartNode.name = groupKey;
+
+		//assign chartDatas
+		chartNode.chartDatas = this.buildChartDatas(groupRst);
 
 		//assign groupedDatas which is needed when building tree;
 		chartNode.groupedDatas = groupRst;
+		
+		return chartNode;
+	}
 
-		//assign chartDatas
+	//build chartdatas
+	private buildChartDatas(groupDatas: any): Array<ChartData> {
 		let chartDatas: Array<ChartData> = [];
-		for (let p in groupRst) {
+		for (let p in groupDatas) {
 			if (p) {
 				let chartData: ChartData = new ChartData();
 				chartData.key = p;
-				chartData.value = groupRst[p].reduce((sumVal: number, item: any) => {
+				chartData.value = groupDatas[p].reduce((sumVal: number, item: any) => {
 					sumVal += item[this._valuePropertyName];
 					return sumVal;
 				}, 0);
 				chartDatas.push(chartData);
 			}	
 		}
-		chartNode.chartDatas = chartDatas;
-		
-		return chartNode;
+		return chartDatas;
 	}
-}
-
-export function main(): void {
-	let tree: ChartTree = new ChartTree();
-	tree.rawData = rawData;
-	tree.reduceSeq = reduceSeq;
-	tree.buildTree();
 }

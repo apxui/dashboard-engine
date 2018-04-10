@@ -4,6 +4,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 
 import { AppComponent } from './app.component';
 import { TestModule } from './test/test.module';
+import { ChartsModule } from './charts/charts.module';
 
 @NgModule({
 	declarations: [
@@ -12,7 +13,8 @@ import { TestModule } from './test/test.module';
 	imports: [
 		BrowserModule,
 		NgxEchartsModule,
-		TestModule
+		TestModule,
+		ChartsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
