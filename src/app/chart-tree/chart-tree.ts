@@ -1,4 +1,4 @@
-import { ChartNode, Property, Dimension, ChartData} from './entity';
+import { ChartNode, Property, Dimension } from './entity';
 
 
 export class ChartTree {
@@ -24,27 +24,41 @@ export class ChartTree {
 
 		//use a queue to build the tree
 		this.buildTreeByQueue();
+
+		//summarize the value of each node
+		this.buildlNodeValue();
+	}
+
+	private buildlNodeValue(): void {
+		let queue: Array<ChartNode> = [];
+		queue.push(this._rootNode);
+		
+		while (queue.length !== 0) {
+			let node: ChartNode = queue.shift();
+			node.value = node.data.reduce((sumVal, item) => {
+				sumVal += item[this._valuePropertyName];
+				return sumVal;
+			}, 0);
+			node.children.forEach(item => queue.push(item));
+		}	
 	}
 
 
 	//use a queue to build the tree
 	private buildTreeByQueue(): void {
 		let queue: Array<ChartNode> = [];
-		this._rootNode = this.buildChartNode(this._rawData, 0, "Root");
+		this._rootNode = new ChartNode("root", 0, this._rawData, null);
+
 		queue.push(this._rootNode);
 		while (queue.length !== 0) {
 			let chartNode: ChartNode = queue.shift();
-			let groupDatas: any = chartNode.groupedDatas;
-			let children: Array<ChartNode> = [];
-			if (groupDatas) {
-				for (let p in groupDatas) {
-					if (chartNode.groupedDatas[p]) {
-						let newNode: ChartNode = this.buildChartNode(groupDatas[p], chartNode.layer + 1, p);
-						children.push(newNode);
-						queue.push(newNode);
-					}
-				}
-			}	
+			let groupdata = this.group(chartNode.data, chartNode.layer);
+			let children = []
+			for (let p in groupdata) {
+				let newNode: ChartNode = new ChartNode(p, chartNode.layer + 1, groupdata[p], chartNode);
+				children.push(newNode);
+				queue.push(newNode);
+			}
 			chartNode.children = children;
 		}
 	}
@@ -58,60 +72,19 @@ export class ChartTree {
 		});
 	}
 
-	//p
 
 	//divide objs into groups according to property.
-	private group(objs: Array<any>, prop: string): any {
-		let groupRst: any =  objs.reduce((groups: any, item: any) => {
-			const val: any = item[prop];
-			groups[val] = groups[val] || [];
-			groups[val].push(item);
-			return groups;
-		}, {});
-		return groupRst;
-	}
-
-	//build chart node's every property respectively, especially the "chartDatas"
-	private buildChartNode(objs: Array<any>, layer: number, groupKey: string): ChartNode {
-		let chartNode: ChartNode = new ChartNode();
-
+	private group(objs: Array<any>, layer: number): any {
 		if (layer < this._reduceSeq.length) {
 			let prop: string = this._reduceSeq[layer].name;
-			if (!prop || prop.trim() === "") {
-				return null;
-			}
-			let groupRst: Array<any> = this.group(objs, prop);
-			
-			//assign groupedDatas which is needed when building tree;
-			chartNode.groupedDatas = groupRst;
+			let groupRst: any =  objs.reduce((groups: any, item: any) => {
+				const val: any = item[prop];
+				groups[val] = groups[val] || [];
+				groups[val].push(item);
+				return groups;
+			}, {});
+			return groupRst;
 		}
-
-		//assign layer
-		chartNode.layer = layer;
-
-		//assign name
-		chartNode.name = groupKey;
-
-		//assign chartDatas
-		chartNode.chartDatas = this.buildChartDatas(chartNode.groupedDatas);
-		
-		return chartNode;
-	}
-
-	//build chartdatas
-	private buildChartDatas(groupDatas: any): Array<ChartData> {
-		let chartDatas: Array<ChartData> = [];
-		for (let p in groupDatas) {
-			if (p) {
-				let chartData: ChartData = new ChartData();
-				chartData.key = p;
-				chartData.value = groupDatas[p].reduce((sumVal: number, item: any) => {
-					sumVal += item[this._valuePropertyName];
-					return sumVal;
-				}, 0);
-				chartDatas.push(chartData);
-			}	
-		}
-		return chartDatas;
+		return null;
 	}
 }
