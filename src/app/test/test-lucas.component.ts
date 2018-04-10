@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'app-test',
+	selector: 'app-test-lucas',
 	template: `
         <gridStack
 		        [w]="12"
@@ -18,7 +18,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
         <div echarts [options]="options2"></div>
 	`
 })
-export class TestComponent implements OnInit {
+export class TestLucasComponent implements OnInit {
 	options1: any;
 	options2: any;
 

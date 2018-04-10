@@ -1,18 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { ChartsModule } from '../charts/charts.module';
 import { GridStackModule } from '../gridstack/gridstack.module';
-import { TestComponent } from './test.component';
+import { TestGraceComponent } from './test-grace.component';
+import { TestLucasComponent } from './test-lucas.component';
 
 @NgModule({
 	imports: [
+		BrowserModule,
+		CommonModule,
 		NgxEchartsModule,
-		GridStackModule
+		GridStackModule,
+		ChartsModule
 	],
 	declarations: [
-		TestComponent
+		TestLucasComponent,
+		TestGraceComponent
 	],
 	exports: [
-		TestComponent
+		TestLucasComponent,
+		TestGraceComponent
 	]
 })
 export class TestModule {
