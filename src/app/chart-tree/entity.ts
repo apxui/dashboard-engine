@@ -20,11 +20,10 @@ export class ChartData {
 }
 
 export class ChartNode {
-	id: number;
 	name: string;
 	children: Array<any>;
 	chartType: ChartType;
 	chartDatas: Array<ChartData>;
-	groupedDatas: Array<any>;
+	groupedDatas: any;
 	layer: number;
 }
