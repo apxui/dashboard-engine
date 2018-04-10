@@ -34,8 +34,6 @@ export class ChartTree {
 		this._metaData = metadata;
 		this._reduceSeq = reduceseq;
 		this.buildTree();
-		let result: any  = this.getChartTypeForNode(this._rootNode);
-		console.log(result);
 		return this._rootNode;
 	}
 
@@ -53,9 +51,6 @@ export class ChartTree {
 
 		//summarize the value of each node
 		this.buildlNodeValue();
-
-		console.log(this._rootNode);
-		console.log(this._allNodes);
 	}
 
 	private buildlNodeValue(): void {
