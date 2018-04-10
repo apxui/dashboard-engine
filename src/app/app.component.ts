@@ -6,7 +6,7 @@ import { rawData, metaData, reduceSeq } from './data/portfolio.data';
 @Component({
 	selector: 'app-root',
 	template: `
-        <nav class="navbar navbar-expand sticky-top navbar-dark bg-primary d-flex justify-content-between">
+        <nav class="navbar navbar-expand sticky-top navbar-dark bg-secondary d-flex justify-content-between">
             <a class="navbar-brand" href="#"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard Engine</a>
 
             <ul class="navbar-nav">
@@ -20,7 +20,8 @@ import { rawData, metaData, reduceSeq } from './data/portfolio.data';
 			<base-chart [options]="treeOption"></base-chart>
 			<div  *ngFor="let d of chartList">
 				<base-chart [options]="d.chartOption"></base-chart>
-		</div>
+			</div>
+			<app-test></app-test>
 		</div>
 		
 	`

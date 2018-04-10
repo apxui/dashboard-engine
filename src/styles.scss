@@ -1,3 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "styles/bootstrap";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap-grid";
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "assets/jquery-ui/jquery-ui.min.css";
+@import "assets/jquery-ui/jquery-ui.structure.min.css";
+@import "assets/jquery-ui/jquery-ui.theme.min.css";
+@import "~gridstack/dist/gridstack.min.css";
+
 @import "styles/global";
+@import "styles/gridstack";

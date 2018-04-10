@@ -1,9 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'app-test',
 	template: `
-        Test
+        <gridStack
+		        [w]="12"
+		        [animate]="true"
+        >
+            <div gridStackItem
+                 [x]="0" [y]="0" [h]="3" [w]="9">
+            </div>
+            <div gridStackItem
+                 [x]="10" [y]="0" [h]="3" [w]="3">
+            </div>
+        </gridStack>
         <div echarts [options]="options1"></div>
         <div echarts [options]="options2"></div>
 	`
@@ -11,6 +21,9 @@ import { Component, OnInit } from '@angular/core';
 export class TestComponent implements OnInit {
 	options1: any;
 	options2: any;
+
+	constructor() {
+	}
 	
 	ngOnInit(): void {
 		this.draw1();
