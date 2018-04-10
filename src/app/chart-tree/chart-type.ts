@@ -6,17 +6,22 @@ export class ChartTypeDecider {
     private _dimensionChartTable: any = {
         '2': [ChartType.Line],
         '3': [ChartType.Pie, ChartType.Bar],
-        '33': [ChartType.multiBar],
+        '33': [ChartType.multiBar, ChartType.NestedPie],
         '32': [ChartType.multiLine]
     }
 
-    public decideType(reduceSeq: Array<Property>): ChartType {
+    public decideType(reduceSeq: Array<Property>): any {
         this._reduceSeq = reduceSeq;
         let reduceSeqStr: string = this.convertReduceSeqToStr();
-        let type: ChartType;
+        if (this._dimensionChartTable[reduceSeqStr]) {
+            return {
+                "reduceSeq": reduceSeq,
+                "type": this._dimensionChartTable[reduceSeqStr]
+            };
+        } else {
+            return null;
+        }
         
-
-        return ChartType.Bar;
     }
 
     private convertReduceSeqToStr(): string {
