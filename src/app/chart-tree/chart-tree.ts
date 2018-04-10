@@ -33,8 +33,8 @@ export class ChartTree {
 		this._rawData = rawdata;
 		this._metaData = metadata;
 		this._reduceSeq = reduceseq;
-		this.filterRawData();
 		this.buildTree();
+		console.log(this._rootNode);
 		return this._rootNode;
 	}
 
@@ -59,6 +59,9 @@ export class ChartTree {
 	private buildTree(): void {
 		//find value dimension, used in building chartdatas
 		this.findValueDimension();
+
+		//filter data
+		this.filterRawData();
 
 		//use a queue to build the tree
 		this.buildTreeByQueue();

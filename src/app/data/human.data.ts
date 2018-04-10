@@ -68,7 +68,7 @@ export let rawData: Array<any> = [
     },
     {
         name: "Helen",
-        gender: "male",
+        gender: "female",
         birthYear: "1985",
         country: "American",
         identityNo: "9",
@@ -83,7 +83,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Jessie",
+        name: "Lily",
         gender: "female",
         birthYear: "1983",
         country: "China",
