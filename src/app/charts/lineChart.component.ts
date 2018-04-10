@@ -28,6 +28,6 @@ export class LineChartOption {
     series: LineData;
 }
 export class LineData {
-    data: Array<any>;
+    data?: Array<any>;
     type: string;
 }
