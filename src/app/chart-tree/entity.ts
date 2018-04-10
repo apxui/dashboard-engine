@@ -14,16 +14,17 @@ export class Property {
 	dimension: Dimension;
 }
 
-export class ChartData {
-	key: any;
-	value: number;
-}
-
 export class ChartNode {
+	constructor(name: string, layer: number, data: Array<any>,parent: ChartNode) {
+		this.name = name;
+		this.layer = layer;
+		this.data = data;
+		this.parent = parent;
+	}
 	name: string;
-	children: Array<any>;
-	chartType: ChartType;
-	chartDatas: Array<ChartData>;
-	groupedDatas: any;
 	layer: number;
+	data: Array<any>;
+	value: number;
+	children: Array<ChartNode>;
+	parent: ChartNode;
 }
