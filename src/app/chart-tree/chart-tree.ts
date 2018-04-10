@@ -49,6 +49,7 @@ export class ChartTree {
 			this._reduceSeq.forEach((p: Property) => {
 				o[p.name] = item[p.name];
 			});
+			o[this._valuePropertyName] = item[this._valuePropertyName];
 			newRawData.push(o);
 		});
 		this._rawData = newRawData;
