@@ -1,5 +1,5 @@
 ﻿import { Component, EventEmitter, Input, Output, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
-import { IGridStackItem } from './gridstack.types';
+import { IGridStackItem, IGridStackItemResizeEvent } from './gridstack.types';
 declare var $: any; // jQuery
 declare var _: any; // lodash
 
@@ -16,7 +16,7 @@ declare var _: any; // lodash
             </button>
             <span class="card-management" hidden>
 			    <button *ngIf="deleteCardButtonText && deleteCardButtonText != ''" (click)="deleteCard()"
-			            class='btn-gridstack-del-card {{buttonClass}}'>{{deleteCardButtonText}}</button>
+                        class='btn-gridstack-del-card {{buttonClass}}'>{{deleteCardButtonText}}</button>
 		    </span>
         </div>
         <div class="grid-stack" [attr.data-gs-width]="w" [attr.data-gs-animate]="animate">
@@ -24,7 +24,7 @@ declare var _: any; // lodash
             <div gridStackItem
                  spellcheck="false"
                  *ngFor="let item of items"
-                 [x]="item.X" [y]="item.Y" [h]="item.Height" [w]="item.Width" [customid]="item.CardId"
+                 [x]="item.X" [y]="item.Y" [h]="item.Height" [w]="item.Width" [customId]="item.CardId"
                  [content]="item.Content"
                  (dblclick)="onItemClick($event)">
             </div>
@@ -39,6 +39,7 @@ export class GridStackComponent implements AfterViewInit {
 	@Input() buttonClass: string = "";
 	@Input() allowEditing: boolean = false;
 	@Input() options: any[];
+	@Input() items: IGridStackItem[];
 
 	@Input() addButtonText: string;
 	@Input() saveButtonText: string;
@@ -49,7 +50,9 @@ export class GridStackComponent implements AfterViewInit {
 	@Output() saveFunction = new EventEmitter<any>();
 	@Output() deleteFunction = new EventEmitter<boolean>();
 	@Output() deleteCardFunc = new EventEmitter<number>();
-	@Input() items: IGridStackItem[];
+
+	@Output() itemResize = new EventEmitter<IGridStackItemResizeEvent>();
+
 	private isStart = true;
 	private editing = false;
 
@@ -60,8 +63,18 @@ export class GridStackComponent implements AfterViewInit {
 	ngAfterViewInit() {
 		let nativeElement = this.el.nativeElement;
 
-		(<any>$(nativeElement).find(".grid-stack")).gridstack(this.options);
-
+		let jq = (<any>$(nativeElement).find(".grid-stack"));
+		jq.gridstack(this.options);
+		jq.on('gsresizestop', (event, elem) => {
+			const newHeight: string = $(elem).attr('data-gs-height');
+			const newWidth: string = $(elem).attr('data-gs-width');
+			const id: string = $(elem).attr('data-custom-id');
+			this.itemResize.emit({
+				newHeight: Number(newHeight),
+				newWidth: Number(newWidth),
+				CardId: id
+			})
+		});
 	}
 
 	onItemClick(event: any) {
