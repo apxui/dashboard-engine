@@ -17,6 +17,11 @@ export class Property {
 	dimension: Dimension;
 }
 
+export class TypeResult {
+	reduceSeq: Array<Property>;
+	type: Array<ChartType>
+}
+
 export class ChartNode {
 	constructor(id: number, name: string, layer: number, data: Array<any>,parent: ChartNode) {
 		this.id = id;

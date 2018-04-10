@@ -1,4 +1,4 @@
-import { ChartNode, Property, Dimension, ChartType } from './entity';
+import { ChartNode, Property, Dimension, ChartType, TypeResult } from './entity';
 import { ChartTypeDecider } from './chart-type';
 
 
@@ -13,7 +13,7 @@ export class ChartTree {
 	private _id: number = 0;
 	private _allNodes: Array<ChartNode> = [];
 
-	public getChartTypeForNode(node: ChartNode): Array<any> {
+	public getChartTypeForNode(node: ChartNode): Array<TypeResult> {
 		let redSeq: Array<Property> = [];
 		let result: Array<any> = [];
 		//from the layer of the node, judget the type for each further layer
@@ -34,6 +34,7 @@ export class ChartTree {
 		this._metaData = metadata;
 		this._reduceSeq = reduceseq;
 		this.buildTree();
+		console.log(this._rootNode);
 		return this._rootNode;
 	}
 
@@ -41,10 +42,26 @@ export class ChartTree {
 		return this._allNodes[id];
 	}
 
+	private filterRawData(): void {
+		let newRawData: Array<any> = [];
+		this._rawData.forEach((item: any) => {
+			let o: any = {};
+			this._reduceSeq.forEach((p: Property) => {
+				o[p.name] = item[p.name];
+			});
+			o[this._valuePropertyName] = item[this._valuePropertyName];
+			newRawData.push(o);
+		});
+		this._rawData = newRawData;
+	}
+
 	// the process to build a tree
 	private buildTree(): void {
 		//find value dimension, used in building chartdatas
 		this.findValueDimension();
+
+		//filter data
+		this.filterRawData();
 
 		//use a queue to build the tree
 		this.buildTreeByQueue();
