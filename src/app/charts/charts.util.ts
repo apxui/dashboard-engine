@@ -48,17 +48,6 @@ export class ChartsUtil {
         }
     };
 
-    // public static convertToTreeData(originalData: ChartNode): any {
-    //     let treeData: any = {};
-    //     treeData.name = originalData.name;
-    //     if (originalData.children && originalData.children.length > 0) {
-    //         treeData.children = [];
-    //         originalData.children.forEach(element => {
-    //             treeData.children.push(ChartsUtil.convertToTreeData(element));
-    //         });
-    //     }
-    //     return treeData;
-    // }
 
     public static convertToLineOption(): any {
         return {
