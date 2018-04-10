@@ -18,11 +18,8 @@ import { Component } from '@angular/core';
                 </li>
             </ul>
         </nav>
-        
-		<div class="container-fluid">
-			<router-outlet></router-outlet>
-		</div>
-		
+
+        <router-outlet></router-outlet>
 	`
 })
 export class AppComponent {
