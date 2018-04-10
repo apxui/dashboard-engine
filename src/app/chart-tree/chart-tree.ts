@@ -1,4 +1,5 @@
-import { ChartNode, Property, Dimension } from './entity';
+import { ChartNode, Property, Dimension, ChartType } from './entity';
+import { ChartTypeDecider } from './chart-type';
 
 
 export class ChartTree {
@@ -8,12 +9,31 @@ export class ChartTree {
 	private _metaData: Array<any>;
 
 	private _valuePropertyName: string;
+	private _typeDecider: ChartTypeDecider = new ChartTypeDecider();
+
+	public getChartTypeForNode(node: ChartNode): Array<any> {
+		let redSeq: Array<Property> = [];
+		let result: Array<any> = [];
+		//from the layer of the node, judget the type for each further layer
+		for (let i = node.layer; i < this._reduceSeq.length; i++) {
+			redSeq.push(this._reduceSeq[i]);
+			let resultForLayer: any = this._typeDecider.decideType(redSeq.slice());
+			if (resultForLayer) {
+				result.push(resultForLayer);
+			} else {
+				break;
+			}
+		}
+		return result;
+	}
 
 	public buildAndGetRootnode(rawdata: Array<any>, metadata: Array<any>, reduceseq: Array<Property>): ChartNode {
 		this._rawData = rawdata;
 		this._metaData = metadata;
 		this._reduceSeq = reduceseq;
 		this.buildTree();
+		let result: any  = this.getChartTypeForNode(this._rootNode);
+		console.log(result);
 		return this._rootNode;
 	}
 
