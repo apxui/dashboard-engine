@@ -131,7 +131,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Betty",
+        name: "Nancy",
         gender: "female",
         birthYear: "1985",
         country: "China",
@@ -139,7 +139,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Celia",
+        name: "Maggie",
         gender: "female",
         birthYear: "1988",
         country: "American",
@@ -147,7 +147,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Hilary",
+        name: "Lisa",
         gender: "female",
         birthYear: "1984",
         country: "China",
@@ -163,7 +163,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Jim",
+        name: "Arnold",
         gender: "male",
         birthYear: "1985",
         country: "American",
@@ -171,7 +171,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "David",
+        name: "Andrew",
         gender: "male",
         birthYear: "1984",
         country: "China",
@@ -187,7 +187,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "James",
+        name: "Cliff",
         gender: "male",
         birthYear: "1988",
         country: "American",
@@ -195,7 +195,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Green",
+        name: "Devin",
         gender: "male",
         birthYear: "1984",
         country: "China",
@@ -203,7 +203,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Scott",
+        name: "Edward",
         gender: "male",
         birthYear: "1985",
         country: "China",
@@ -211,7 +211,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Park",
+        name: "Eric",
         gender: "male",
         birthYear: "1987",
         country: "American",
@@ -227,7 +227,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Lucas",
+        name: "Harry",
         gender: "male",
         birthYear: "1988",
         country: "China",
@@ -243,7 +243,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Clark",
+        name: "Ivan",
         gender: "male",
         birthYear: "1985",
         country: "American",
@@ -251,7 +251,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "William",
+        name: "Mick",
         gender: "male",
         birthYear: "1984",
         country: "American",
@@ -259,7 +259,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Shane",
+        name: "Norman",
         gender: "male",
         birthYear: "1986",
         country: "China",
@@ -267,7 +267,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Bing",
+        name: "Nomic",
         gender: "male",
         birthYear: "1986",
         country: "American",
@@ -275,7 +275,7 @@ export let rawData: Array<any> = [
         salary: 100
     },
     {
-        name: "Winston",
+        name: "Rod",
         gender: "male",
         birthYear: "1983",
         country: "China",
@@ -341,6 +341,10 @@ export let reduceSeq: Array<any> = [
     },
     {
         name: "country",
+        dimension: Dimension.StaticProperty
+    },
+    {
+        name: "name",
         dimension: Dimension.StaticProperty
     }
 ];
