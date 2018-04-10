@@ -3,6 +3,7 @@ import { ChartTree } from '../chart-tree/chart-tree';
 import { ChartsUtil } from '../charts/charts.util';
 import { metaData, rawData, reduceSeq } from '../data/portfolio.data';
 import { fakeBarData } from '../charts/bar.option';
+import { ChartNode } from '../chart-tree/entity';
 
 @Component({
 	selector: 'app-test-grace',
@@ -28,11 +29,18 @@ export class TestGraceComponent {
 		this.treeOption = {
 			option: mainTreeOption,
 			onTreeClickHandler: (treeNodeData: any) => {
-				this._createBarChart();
+				console.log(treeNodeData);
+				let node: ChartNode = mainTree.getNode(treeNodeData.uid);
+				let chartData: any = mainTree.getChartTypeForNode(node);
+				console.log(chartData);
+				
+				this._createBarChart(node);
 			}
 		};
 	}
-	_createBarChart(): void {
+	_createBarChart(node: ChartNode): void {
+		console.log(node);
+		
 		if (!this.chartList) {
 			this.chartList = [];
 		}
