@@ -19,12 +19,14 @@ export class Property {
 }
 
 export class ChartNode {
-	constructor(name: string, layer: number, data: Array<any>,parent: ChartNode) {
+	constructor(id: number, name: string, layer: number, data: Array<any>,parent: ChartNode) {
+		this.id = id;
 		this.name = name;
 		this.layer = layer;
 		this.data = data;
 		this.parent = parent;
 	}
+	id: number;
 	name: string;
 	layer: number;
 	data: Array<any>;

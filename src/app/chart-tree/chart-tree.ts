@@ -10,6 +10,8 @@ export class ChartTree {
 
 	private _valuePropertyName: string;
 	private _typeDecider: ChartTypeDecider = new ChartTypeDecider();
+	private _id: number = 0;
+	private _allNodes: Array<ChartNode> = [];
 
 	public getChartTypeForNode(node: ChartNode): Array<any> {
 		let redSeq: Array<Property> = [];
@@ -17,7 +19,7 @@ export class ChartTree {
 		//from the layer of the node, judget the type for each further layer
 		for (let i = node.layer; i < this._reduceSeq.length; i++) {
 			redSeq.push(this._reduceSeq[i]);
-			let resultForLayer: any = this._typeDecider.decideType(redSeq.slice());
+			let resultForLayer: any = this._typeDecider.decideType(redSeq.slice());//use slice to shallow copy Array: redSeq
 			if (resultForLayer) {
 				result.push(resultForLayer);
 			} else {
@@ -37,6 +39,10 @@ export class ChartTree {
 		return this._rootNode;
 	}
 
+	public getNode(id: number): ChartNode {
+		return this._allNodes[id];
+	}
+
 	// the process to build a tree
 	private buildTree(): void {
 		//find value dimension, used in building chartdatas
@@ -47,6 +53,9 @@ export class ChartTree {
 
 		//summarize the value of each node
 		this.buildlNodeValue();
+
+		console.log(this._rootNode);
+		console.log(this._allNodes);
 	}
 
 	private buildlNodeValue(): void {
@@ -67,15 +76,16 @@ export class ChartTree {
 	//use a queue to build the tree
 	private buildTreeByQueue(): void {
 		let queue: Array<ChartNode> = [];
-		this._rootNode = new ChartNode("root", 0, this._rawData, null);
+		this._rootNode = new ChartNode(0, "root", 0, this._rawData, null);
 
 		queue.push(this._rootNode);
 		while (queue.length !== 0) {
 			let chartNode: ChartNode = queue.shift();
+			this._allNodes.push(chartNode);
 			let groupdata = this.group(chartNode.data, chartNode.layer);
 			let children = []
 			for (let p in groupdata) {
-				let newNode: ChartNode = new ChartNode(p, chartNode.layer + 1, groupdata[p], chartNode);
+				let newNode: ChartNode = new ChartNode(++this._id, p, chartNode.layer + 1, groupdata[p], chartNode);
 				children.push(newNode);
 				queue.push(newNode);
 			}
