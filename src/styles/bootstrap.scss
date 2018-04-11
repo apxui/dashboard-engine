@@ -3,3 +3,10 @@
 	margin: 0;
 }
 
+.flex-grow-1 {
+	flex-grow: 1;
+}
+
+button:focus, .btn:focus, .btn.focus {
+	outline: none;
+}
