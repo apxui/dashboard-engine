@@ -215,8 +215,7 @@ export class ChartsUtil {
 		subBarLabels.forEach((sublabel: string) => {
 			let subBarData: number[] = [];
 			chartNode.children.forEach((node: ChartNode) => { // first dimension
-				let N: ChartNode = node.children.find((N: ChartNode) => N.name === sublabel);
-				subBarData.push(N ? N.value : 0);
+				subBarData.push(node[sublabel]);
 			})
 			barData.push({
 				name: sublabel,
