@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ChartTree } from '../chart-tree/chart-tree';
 import { ChartsUtil } from '../charts/charts.util';
-import { metaData, rawData, reduceSeq } from '../data/portfolio.data';
+import { metaData, rawData, reduceSeq } from '../data/human.data';
 import { fakeBarData } from '../charts/bar.option';
 import { ChartNode, TypeResult, ChartType, Property } from '../chart-tree/entity';
 
@@ -48,10 +48,30 @@ export class TestGraceComponent {
 		if (chartTypes && chartTypes.length > 0) {
 			chartTypes.forEach((ct: TypeResult) => {
 				// to-do
+				if (ct.type.indexOf(ChartType.Pie) >= 0) {
+					let pieOption: any = ChartsUtil.convertChartNodeToPieNode(chartNode, ct.reduceSeq);
+					this.chartList.push(
+						{
+							chartOption: {
+								option: pieOption
+							},
+							chartType: 'pie'
+						});
+				}
+				if (ct.type.indexOf(ChartType.NestedPie) >= 0) {
+					let nestedPieOption: any = ChartsUtil.convertChartNodeToNestedPieNode(chartNode, ct.reduceSeq);
+					this.chartList.push(
+						{
+							chartOption: {
+								option: nestedPieOption
+							},
+							chartType: 'nestedPie'
+						});
+				}
 				if (ct.type.indexOf(ChartType.Bar) >= 0) {
 					this._createBarChart(ct.reduceSeq, chartNode);
 				}
-				if (ct.type.indexOf(ChartType.multiBar) >= 0) {
+				if (ct.type.indexOf(ChartType.MultiBar) >= 0) {
 					console.log('multibar');
 					this._createMultiBarChart(ct.reduceSeq, chartNode, dimLabels[chartTypes.indexOf(ct)]);
 				}
