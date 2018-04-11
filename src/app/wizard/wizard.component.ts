@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
-import { Dimension } from '../chart-tree/entity';
+import { Dimension, Property } from '../chart-tree/entity';
 import { metaData as humanMeta, rawData as humanData } from '../data/human.data';
 import { metaData as portfolioMeta, rawData as portfolioData } from '../data/portfolio.data';
+import { DashboardEngine } from '../engine/engine';
 import { SupportedEntities } from '../main/main.constants';
 import { WizardService } from './wizard.service';
 
@@ -157,12 +158,8 @@ export class WizardComponent {
 	}
 
 	private runEngine(): any {
-		switch (this.selectedEntity) {
-			case SupportedEntities.Humans: break;
-			case SupportedEntities.Portfolios: break;
-			default:
-		}
-		return null;
+		const other: Property[] = this.selectedOtherFields.map(f => this.meta.find(m => m.name === f));
+		return DashboardEngine.buildMainTree(this.data, this.meta, other, this.selectedVFields);
 	}
 
 	options(): any[] {
