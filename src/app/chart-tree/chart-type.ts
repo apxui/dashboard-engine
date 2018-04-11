@@ -18,7 +18,7 @@ export class ChartTypeDecider {
         '313': ChartType.MultiBar,
         '412': ChartType.MultiLine,
         '413': ChartType.MultiBar
-    }
+    };
 
     public decideType(reduceSeq: Array<Property>, pivotValues: Array<string>): TypeResult {
         this._reduceSeq = reduceSeq;
@@ -30,6 +30,7 @@ export class ChartTypeDecider {
             return {
                 'reduceSeq': this._reduceSeq,
                 'type': [this._dimensionChartTable[reduceSeqStr]]
+            };
         } else {
             return null;
         }

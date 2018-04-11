@@ -31,7 +31,7 @@ import 'rxjs/add/operator/take';
                      style="overflow-y: auto; overflow-x: hidden;"
                 >
 	                <div class="row pb-3" style="height: 300px; border-bottom: #dee2e6 1px solid; overflow-y: auto;">
-                        <div class="col-12">
+                        <div class="col-12" *ngIf="activeChartGroup?.treeOptions?.treeOptions">
                             <div echarts [options]="activeChartGroup.treeOptions.treeOptions" (chartClick)="onTreeClick($event.data)"></div>
                         </div>
 	                </div>
@@ -50,10 +50,7 @@ export class MainComponent {
 		id: 'empty',
 		name: '(empty)',
 		entity: undefined,
-		treeOptions: {
-			tree: null,
-			treeOptions: null
-		},
+		treeOptions: null,
 		chartOptions: []
 	};
 
@@ -115,13 +112,12 @@ export class MainComponent {
 	}
 
 	private resetChartGroups(): void {
-		this.chartGroups = [this.EmptyChartGroup];
-		this.activeChartGroup = this.EmptyChartGroup;
+		this.activeChartGroup = {...this.EmptyChartGroup};
+		this.chartGroups = [this.activeChartGroup];
 		this.storage.clearAll();
 	}
 
 	private createChartGroup(entity: string, treeOptions: any, chartOptions: any[], inNewTab: boolean = true): void {
-		console.log(treeOptions);
 		const groups: IChartGroup[] = [...this.chartGroups];
 		const newId: string = `${this.uid ++}_${entity}`;
 		const newGroup: IChartGroup = {
@@ -165,8 +161,8 @@ export class MainComponent {
 
 	private updateStorage(activeOnly: boolean = false): void {
 		if (!activeOnly) {
-			this.storage.write('dashboard_chart_groups', this.chartGroups, 'object');
+			// TODO fix circular, this.storage.write('dashboard_chart_groups', this.chartGroups, 'object');
 		}
-		this.storage.write('dashboard_active_chart_group', this.activeChartGroup, 'object');
+		// TODO fix circular, this.storage.write('dashboard_active_chart_group', this.activeChartGroup, 'object');
 	}
 }
