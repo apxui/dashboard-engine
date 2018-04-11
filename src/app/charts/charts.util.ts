@@ -513,5 +513,53 @@ export class ChartsUtil {
         
         return option;
     }
+
+    // radar chart
+    public static convertChartNodeToRadarChartNode(node: ChartNode, reduceSeqData: Array<Property>): any {
+        let legendData: Array<any> = [];
+        let seriesData: Array<any> = [];
+        let indicator: Array<any> = [];
+		node.children.forEach((e: any) => {
+            legendData.push(e.name);
+            
+            let d: Array<any> = [];
+            e.children.forEach((c: any) => {
+                indicator.push({name: c.name, max: 500});
+                d.push(c.value);
+            });
+
+			seriesData.push({value: d, name: e.name});
+		});
+        
+        let option: any = {
+            title: {
+                text: 'Radar Chart'
+            },
+            tooltip: {},
+            legend: {
+                data: legendData
+            },
+            radar: {
+                // shape: 'circle',
+                name: {
+                    textStyle: {
+                        color: '#fff',
+                        backgroundColor: '#999',
+                        borderRadius: 3,
+                        padding: [3, 5]
+                   }
+                },
+                indicator: indicator
+            },
+            series: [{
+                name: 'Budget vs spending',
+                type: 'radar',
+                // areaStyle: {normal: {}},
+                data: seriesData
+            }]
+        };
+
+        return option;
+    }
     
 }

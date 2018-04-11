@@ -43,11 +43,14 @@ export class TestDavidComponent {
 						}
 						else if(t === 3 || t === 1) {
 							// line/bar chart
-
+							
 						}
 						else if(t === 6) {
 							// multiLine/multiBar bar
 							this.buildNestedPieCharts(node, e.reduceSeq);
+						}
+						else if (t === 4 || t === 5) {
+							this.buildRadarCharts(node, e.reduceSeq);
 						}
 					});
 				});
@@ -61,5 +64,9 @@ export class TestDavidComponent {
 
 	buildNestedPieCharts(node: ChartNode, reduceSeqData: Array<Property>): void {
 		this.pOption = ChartsUtil.convertChartNodeToNestedPieNode(node, reduceSeqData);
+	}
+
+	buildRadarCharts(node: ChartNode, reduceSeqData: Array<Property>): void {
+		this.pOption = ChartsUtil.convertChartNodeToRadarChartNode(node, reduceSeqData);
 	}
 }

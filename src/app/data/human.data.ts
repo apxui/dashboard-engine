@@ -555,7 +555,32 @@ export let metaData: Array<any> = [
     {
         name: "house",
         dimension: Dimension.Value
+    },
+    {
+        name: "IQ",
+        dimension: Dimension.Value
+    },
+    {
+        name: "EQ",
+        dimension: Dimension.Value
+    },
+    {
+        name: "FQ",
+        dimension: Dimension.Value
+    },
+    {
+        name: "SQ",
+        dimension: Dimension.Value
+    },
+    {
+        name: "BQ",
+        dimension: Dimension.Value
+    },
+    {
+        name: "AQ",
+        dimension: Dimension.Value
     }
+    
 ];
 
 export let reduceSeq: Array<any> = [
@@ -576,3 +601,12 @@ export let reduceSeq: Array<any> = [
         dimension: Dimension.StaticProperty
     }
 ];
+
+export let pivotValues: Array<string> = [
+    "IQ",
+    "EQ",
+    "FQ",
+    "SQ",
+    "BQ",
+    "AQ"
+]

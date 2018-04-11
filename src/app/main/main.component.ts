@@ -10,7 +10,7 @@ import 'rxjs/add/operator/take';
 	styleUrls: ['./main.component.scss'],
 	template: `
 		<div class="d-flex flex-row" style="height: 100%;">
-            <div style="min-width: 300px; flex: 0 1 auto; border-right: 1px solid #dee2e6;">
+            <div style="min-width: 300px; width: 300px; flex: 0 1 auto; border-right: 1px solid #dee2e6;">
                 <app-wizard (run)="onRun($event)" (runNew)="onRunNew($event)" (closeAll)="onCloseAll()"></app-wizard>
             </div>
 			<div class="flex-grow-1 d-flex flex-column pl-3 pr-3 py-3">

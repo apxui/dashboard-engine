@@ -8,7 +8,7 @@ export class ChartTree {
 	private _rawData: Array<any>;
 	private _metaData: Array<any>;
 
-	private _valuePropertyName: string;
+	private _pivotValues: Array<string>;
 	private _typeDecider: ChartTypeDecider = new ChartTypeDecider();
 	private _id: number = 0;
 	private _allNodes: Array<ChartNode> = [];
@@ -30,10 +30,11 @@ export class ChartTree {
 		return result;
 	}
 
-	public buildAndGetRootnode(rawdata: Array<any>, metadata: Array<any>, reduceseq: Array<Property>): ChartNode {
+	public buildAndGetRootnode(rawdata: Array<any>, metadata: Array<any>, reduceseq: Array<Property>, pivotValues: Array<string>): ChartNode {
 		this._rawData = rawdata;
 		this._metaData = metadata;
 		this._reduceSeq = reduceseq;
+		this._pivotValues = pivotValues;
 		this.buildTree();
 		return this._rootNode;
 	}
@@ -53,7 +54,9 @@ export class ChartTree {
 			this._reduceSeq.forEach((p: Property) => {
 				o[p.name] = item[p.name];
 			});
-			o[this._valuePropertyName] = item[this._valuePropertyName];
+			this._pivotValues.forEach((pv: string) => {
+				o[pv] = item[pv];
+			});
 			newRawData.push(o);
 		});
 		this._rawData = newRawData;
@@ -61,9 +64,6 @@ export class ChartTree {
 
 	// the process to build a tree
 	private buildTree(): void {
-		//find value dimension, used in building chartdatas
-		this.findValueDimension();
-
 		//filter data
 		this.filterRawData();
 
@@ -95,10 +95,12 @@ export class ChartTree {
 		
 		while (queue.length !== 0) {
 			let node: ChartNode = queue.shift();
-			node.value = node.data.reduce((sumVal, item) => {
-				sumVal += item[this._valuePropertyName];
-				return sumVal;
-			}, 0);
+			this._pivotValues.forEach((pv: string) => {
+				node[pv] = node.data.reduce((sumVal, item) => {
+					sumVal += item[pv];
+					return sumVal;
+				}, 0);
+			});
 			node.children.forEach(item => queue.push(item));
 		}	
 	}
@@ -122,15 +124,6 @@ export class ChartTree {
 			}
 			chartNode.children = children;
 		}
-	}
-
-	//find the value dimension because it need to aggregate the value for each group after grouped.
-	private findValueDimension(): void {
-		this._metaData.forEach((prop: Property) => {
-			if (prop.dimension === Dimension.Value) {
-				this._valuePropertyName = prop.name;
-			}
-		});
 	}
 
 
