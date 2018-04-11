@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ChartTree } from '../chart-tree/chart-tree';
 import { ChartsUtil } from '../charts/charts.util';
-import { metaData, rawData, reduceSeq } from '../data/human.data';
+import { metaData, rawData, reduceSeq, pivotValues } from '../data/human.data';
 import { fakeBarData } from '../charts/bar.option';
 import { ChartNode, TypeResult, ChartType, Property } from '../chart-tree/entity';
 
@@ -24,7 +24,7 @@ export class TestGraceComponent {
 	}
 	buildMainTree(): void {
 		let mainTree: ChartTree = new ChartTree();
-		let mainTreeData: any = mainTree.buildAndGetRootnode(rawData, metaData, reduceSeq);
+		let mainTreeData: any = mainTree.buildAndGetRootnode(rawData, metaData, reduceSeq, pivotValues);
 		let mainTreeOption: any = ChartsUtil.convertToTreeOption(mainTreeData);
 		console.log(mainTreeData);
 

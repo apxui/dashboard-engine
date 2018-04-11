@@ -2,6 +2,122 @@ import { ChartNode, Property } from "../chart-tree/entity";
 import { barTooltip, barToolBox, barMarkPoint, barMarkLine } from "./bar.option";
 
 export class ChartsUtil {
+    // 2 values
+    public static convertToScatterOption(_data: number[][]): any {
+        return {
+            xAxis: {},
+            yAxis: {},
+            series: [{
+                symbolSize: 20,
+                data: _data,
+                type: 'scatter'
+            }]
+        };
+    }
+    // 3d line (v,v,t)
+    public static convertTo3DLineOption(_data: number[][]): any {
+        return {
+            tooltip: {},
+            backgroundColor: '#fff',
+            visualMap: {
+                show: false,
+                dimension: 2,
+                min: 0,
+                max: 30,
+                inRange: {
+                    color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+                }
+            },
+            xAxis3D: {
+                type: 'value'
+            },
+            yAxis3D: {
+                type: 'value'
+            },
+            zAxis3D: {
+                type: 'value'
+            },
+            grid3D: {
+                viewControl: {
+                    projection: 'orthographic'
+                }
+            },
+            series: [{
+                type: 'line3D',
+                data: _data,
+                lineStyle: {
+                    width: 4
+                }
+            }]
+        }
+    }
+    // 3d bar (v,v,v)
+    public static convertTo3DBarOption(_data: number[][]): any {
+        return {
+            tooltip: {},
+            visualMap: {
+                max: 20,
+                inRange: {
+                    color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+                }
+            },
+            xAxis3D: {
+                type: 'value'
+                // data: hours,
+                // name: 'abc'
+            },
+            yAxis3D: {
+                type: 'value'
+            },
+            zAxis3D: {
+                type: 'value'
+            },
+            grid3D: {
+                boxWidth: 200,
+                boxDepth: 80,
+                viewControl: {
+                    // projection: 'orthographic'
+                },
+                light: {
+                    main: {
+                        intensity: 1.2,
+                        shadow: true
+                    },
+                    ambient: {
+                        intensity: 0.3
+                    }
+                }
+            },
+            series: [{
+                type: 'bar3D',
+                data: _data.map(function (item) {
+                    return {
+                        value: [item[1], item[0], item[2]],
+                    }
+                }),
+                shading: 'lambert',
+        
+                label: {
+                    textStyle: {
+                        fontSize: 16,
+                        borderWidth: 1
+                    }
+                },
+        
+                emphasis: {
+                    label: {
+                        textStyle: {
+                            fontSize: 20,
+                            color: '#900'
+                        }
+                    },
+                    itemStyle: {
+                        color: '#900'
+                    }
+                }
+            }]
+        };
+    }
     public static convertToTreeOption(data: ChartNode): any {
 		let treeData: any = ChartsUtil.convertChartNodeToTreeNode(data);
 		return {
