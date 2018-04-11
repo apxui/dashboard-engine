@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { SupportedEntities } from '../main/main.constants';
 import { WizardService } from './wizard.service';
@@ -16,18 +16,13 @@ import { WizardService } from './wizard.service';
                 <div class="px-3 pt-1 pb-3">
                     <div class="form-group">
                         <label>Which data are you interested in?</label>
-                        <select class="form-control" formControlName="entity">
-                            <option *ngFor="let e of supportedEntities">{{e}}</option>
+                        <select class="form-control" [formControlName]="'entity'">
+                            <option *ngFor="let e of supportedEntities" [value]="e">{{e}}</option>
                         </select>
                     </div>
 	                <div class="form-group">
-                        <label>Which value do you care the most?</label>
-                        <div class="form-check" *ngFor="let vf of VFields">
-                            <input class="form-check-input" type="radio" name="pivotVField" value="option1" checked>
-                            <label class="form-check-label">
-                                {{vf}}
-                            </label>
-                        </div>
+                        <label>Which values do you care the most?</label>
+                        
 	                </div>
                 </div>
             </div>
@@ -47,24 +42,24 @@ export class WizardComponent {
 
 	readonly supportedEntities: string[] = SupportedEntities.ALL;
 
-	entity: string = SupportedEntities.Humans;
-	pivotVField: string;
-	VFields: string[];
-	otherFields: string[];
+	selectedVFields: string[];
+	selectedOtherFields: string[];
 
-	form: FormGroup = new FormGroup({});
+	allVFields: string[];
+	allTFields: string[];
+	allPFields: string[];
 
-	constructor(private wizardService: WizardService) {
+	form: FormGroup;
 
-	}
-
-	onChooseEntity(entity: string): void {
-
+	constructor(private fb: FormBuilder) {
+		this.form = this.fb.group({
+			entity: SupportedEntities.Humans
+		});
 	}
 
 	onRun(): void {
 		this.run.emit({
-			entity: this.entity,
+			entity: this.form.get('entity').value,
 			treeOptions: null,
 			chartOptions: this.options()
 		});
@@ -72,7 +67,7 @@ export class WizardComponent {
 
 	onRunNew(): void {
 		this.runNew.emit({
-			entity: this.entity,
+			entity: this.form.get('entity').value,
 			treeOptions: null,
 			chartOptions: this.options()
 		});
