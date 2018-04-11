@@ -118,7 +118,6 @@ export class MainComponent {
 	}
 
 	private createChartGroup(entity: string, treeOptions: any, chartOptions: any[], inNewTab: boolean = true): void {
-		console.log(treeOptions);
 		const groups: IChartGroup[] = [...this.chartGroups];
 		const newId: string = `${this.uid ++}_${entity}`;
 		const newGroup: IChartGroup = {
@@ -162,8 +161,8 @@ export class MainComponent {
 
 	private updateStorage(activeOnly: boolean = false): void {
 		if (!activeOnly) {
-			this.storage.write('dashboard_chart_groups', this.chartGroups, 'object');
+			// TODO fix circular, this.storage.write('dashboard_chart_groups', this.chartGroups, 'object');
 		}
-		this.storage.write('dashboard_active_chart_group', this.activeChartGroup, 'object');
+		// TODO fix circular, this.storage.write('dashboard_active_chart_group', this.activeChartGroup, 'object');
 	}
 }
