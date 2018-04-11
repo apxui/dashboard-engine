@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { StorageService } from '../storage/storage.service';
 import { WizardService } from '../wizard/wizard.service';
 import { SupportedEntities } from './main.constants';
 import { IChartGroup } from './main.types';
@@ -23,7 +24,7 @@ import 'rxjs/add/operator/filter';
 			<div class="flex-grow-1 d-flex flex-column pr-3 py-3">
                 <ul class="nav nav-tabs sticky-top" style="min-height: 42px; flex: 0 1 auto;">
                     <li class="nav-item" *ngFor="let cg of chartGroups; let i = index">
-                        <div class="nav-link" [class.active]="cg.id === activeChartGroup?.id" (click)="activeChartGroup = cg">
+                        <div class="nav-link" [class.active]="cg.id === activeChartGroup?.id" style="cursor: pointer;" (click)="onSelectChartGroup(cg)">
 	                        {{cg.name || cg.id}}
                             <button type="button" class="close ml-3" aria-label="Close" (click)="onCloseChartGroup(cg, i)">
                                 <span aria-hidden="true">&times;</span>
@@ -59,7 +60,9 @@ export class MainComponent implements OnDestroy {
 
 	private createChartsSubscription: Subscription;
 
-	constructor(private wizard: WizardService) {}
+	constructor(private wizard: WizardService, private storage: StorageService) {
+		this.restoreFromStorage();
+	}
 
 	ngOnDestroy(): void {
 		if (this.createChartsSubscription) {
@@ -88,6 +91,11 @@ export class MainComponent implements OnDestroy {
 		});
 	}
 
+	onSelectChartGroup(group: IChartGroup): void {
+		this.activeChartGroup = group;
+		this.updateStorage(true);
+	}
+
 	onCloseChartGroup(group: IChartGroup, index: number): void {
 		if (this.chartGroups.length <= 1) {
 			this.resetChartGroups();
@@ -95,17 +103,17 @@ export class MainComponent implements OnDestroy {
 			const newActive: IChartGroup = index - 1 >= 0 ? this.chartGroups[index - 1] : this.chartGroups[index + 1];
 			this.chartGroups = this.chartGroups.filter(cg => cg.id != group.id);
 			this.activeChartGroup = newActive;
-
-			// TODO remove from localStorage
+			this.updateStorage();
 		}
 	}
 
-	resetChartGroups(): void {
+	private resetChartGroups(): void {
 		this.chartGroups = [this.EmptyChartGroup];
 		this.activeChartGroup = this.EmptyChartGroup;
+		this.storage.clearAll();
 	}
 
-	createNewChartGroup(entity: string, chartOptions: any[]): void {
+	private createNewChartGroup(entity: string, chartOptions: any[]): void {
 		const groups: IChartGroup[] = [...this.chartGroups];
 		if (this.activeChartGroup.id === this.EmptyChartGroup.id) {
 			groups.length = 0;
@@ -120,6 +128,29 @@ export class MainComponent implements OnDestroy {
 		this.chartGroups = groups;
 		this.activeChartGroup = newGroup;
 
-		// TODO save in localStorage
+		this.updateStorage();
+	}
+
+	private restoreFromStorage(): void {
+		const groups: IChartGroup[] = this.storage.read('dashboard_chart_groups', 'object');
+		if (!groups) {
+			this.resetChartGroups();
+		} else {
+			this.chartGroups = groups;
+		}
+
+		const active: IChartGroup = this.storage.read('dashboard_active_chart_group', 'object');
+		if (!active) {
+			this.activeChartGroup = this.chartGroups[0];
+		} else {
+			this.activeChartGroup = active;
+		}
+	}
+
+	private updateStorage(activeOnly: boolean = false): void {
+		if (!activeOnly) {
+			this.storage.write('dashboard_chart_groups', this.chartGroups, 'object');
+		}
+		this.storage.write('dashboard_active_chart_group', this.activeChartGroup, 'object');
 	}
 }
