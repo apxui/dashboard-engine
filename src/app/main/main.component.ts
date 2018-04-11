@@ -52,6 +52,7 @@ export class MainComponent {
 
 	chartGroups: IChartGroup[] = [this.EmptyChartGroup];
 	activeChartGroup: IChartGroup = this.EmptyChartGroup;
+	uid: number = 0;
 
 	constructor(private wizard: WizardService, private storage: StorageService) {
 		this.restoreFromStorage();
@@ -88,9 +89,11 @@ export class MainComponent {
 		if (this.chartGroups.length <= 1) {
 			this.resetChartGroups();
 		} else {
-			const newActive: IChartGroup = index - 1 >= 0 ? this.chartGroups[index - 1] : this.chartGroups[index + 1];
+			if (group.id === this.activeChartGroup.id) {
+				const newActive: IChartGroup = index - 1 >= 0 ? this.chartGroups[index - 1] : this.chartGroups[index + 1];
+				this.activeChartGroup = newActive;
+			}
 			this.chartGroups = this.chartGroups.filter(cg => cg.id != group.id);
-			this.activeChartGroup = newActive;
 			this.updateStorage();
 		}
 	}
@@ -103,17 +106,24 @@ export class MainComponent {
 
 	private createChartGroup(entity: string, treeOptions: any, chartOptions: any[], inNewTab: boolean = true): void {
 		const groups: IChartGroup[] = [...this.chartGroups];
-		if (this.activeChartGroup.id === this.EmptyChartGroup.id) {
-			groups.length = 0;
-		}
+		const newId: string = `${this.uid ++}_${entity}`;
 		const newGroup: IChartGroup = {
 			entity: entity,
-			id: `${groups.length}_${entity}`,
-			name: `${groups.length}_${entity}`,
+			id: newId,
+			name: newId,
 			treeOptions: treeOptions,
 			chartOptions: [...chartOptions]
 		};
-		groups.push(newGroup);
+		if (inNewTab) {
+			if (this.activeChartGroup.id === this.EmptyChartGroup.id) {
+				groups.length = 0;
+			}
+			groups.push(newGroup);
+		} else {
+			const activeIndex: number = groups.findIndex(g => g.id === this.activeChartGroup.id);
+			groups[activeIndex] = newGroup;
+		}
+
 		this.chartGroups = groups;
 		this.activeChartGroup = newGroup;
 
