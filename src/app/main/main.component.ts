@@ -80,11 +80,12 @@ export class MainComponent {
 	onTreeClick(data: any): void {
 		let node: ChartNode = this.activeChartGroup.treeOptions.tree.getNode(data.uid);
 		let chartTypes: TypeResult[] = this.activeChartGroup.treeOptions.tree.getChartTypeForNode(node);
+		let pivotValues: string [] = this.activeChartGroup.treeOptions.tree.getPivotValues();
 		let dimLabels: any = [];
 		chartTypes.forEach((ct: TypeResult) => {
 			dimLabels.push(ct.reduceSeq.map((dim: Property) => this.activeChartGroup.treeOptions.tree.getAllPropertiesByDim(dim.name)));
 		});
-		const charts: any[] = DashboardEngine.createChartOption(chartTypes, node, dimLabels);
+		const charts: any[] = DashboardEngine.createChartOption(chartTypes, node, dimLabels, pivotValues);
 		this.activeChartGroup.chartOptions = charts;
 	}
 

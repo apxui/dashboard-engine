@@ -32,6 +32,10 @@ export class ChartTree {
 		return this._dimPropTable[dim];
 	}
 
+	public getPivotValues(): Array<string> {
+		return this._pivotValues;
+	}
+
 	public getChartTypeForNode(node: ChartNode): Array<TypeResult> {
 		let redSeq: Array<Property> = [];
 		let result: Array<any> = [];

@@ -204,7 +204,28 @@ export class ChartsUtil {
 		})
 
 		return ChartsUtil.convertToBarOption(type, title, barData, xAxisLabels, subBarLabels);
-	}
+    }
+    public static convertToMultiValueBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, pivotValues: string[]): any {
+        console.log(chartNode);
+        
+		let title: string = "";
+        let xAxisLabels: string[] = chartNode.children.map((e: ChartNode) => e.name); // x axis label, should be the first dimension
+		let subBarLabels: string[] = pivotValues; //eq,sq,bq
+		let barData: any = [];
+		subBarLabels.forEach((sublabel: string) => {
+			let subBarData: number[] = [];
+			chartNode.children.forEach((node: ChartNode) => { // first dimension
+				let N: ChartNode = node.children.find((N: ChartNode) => N.name === sublabel);
+				subBarData.push(N ? N.value : 0);
+			})
+			barData.push({
+				name: sublabel,
+				data: subBarData
+			});
+		})
+
+		return ChartsUtil.convertToBarOption('bar', title, barData, xAxisLabels, subBarLabels);
+    }
 	public static convertToSimpleBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, type: string): any {
 		let xAxisLabels: string[] = chartNode.children.map((e: ChartNode) => e.name);
 		let data: any[] = chartNode.children.map((e: ChartNode) => e.value);

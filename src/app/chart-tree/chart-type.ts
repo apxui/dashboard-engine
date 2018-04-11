@@ -30,10 +30,11 @@ export class ChartTypeDecider {
             return {
                 'reduceSeq': this._reduceSeq,
                 'type': [this._dimensionChartTable[reduceSeqStr]]
+            };
         } else {
             return null;
         }
-        
+
     }
 
     private convertReduceSeqToStr(): string {

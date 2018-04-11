@@ -13,7 +13,7 @@ export class DashboardEngine {
 		};
 	}
 
-	public static createChartOption(chartTypes: TypeResult[], chartNode: ChartNode, dimLabels: any): any[] {
+	public static createChartOption(chartTypes: TypeResult[], chartNode: ChartNode, dimLabels: any, pivotValues?: string[]): any[] {
 		let result: any[] = [];
 		if (chartTypes && chartTypes.length > 0) {
 			chartTypes.forEach((ct: TypeResult) => {
@@ -30,7 +30,12 @@ export class DashboardEngine {
 					result.push(ChartsUtil.convertToSimpleBarChartOption(ct.reduceSeq, chartNode, 'bar'));
 				}
 				if (ct.type.indexOf(ChartType.MultiBar) >= 0) {
-					result.push(ChartsUtil.convertToMultiBarChartOption(ct.reduceSeq, chartNode, dimLabels[chartTypes.indexOf(ct)], 'bar'));
+                    if (ct.reduceSeq.length === 2) {
+                        result.push(ChartsUtil.convertToMultiBarChartOption(ct.reduceSeq, chartNode, dimLabels[chartTypes.indexOf(ct)], 'bar'));
+					} else if (ct.reduceSeq.length === 1){
+						// self value
+						result.push(ChartsUtil.convertToMultiValueBarChartOption(ct.reduceSeq, chartNode, pivotValues));
+					}
 				}
 				if (ct.type.indexOf(ChartType.Line) >= 0) {
 					result.push(ChartsUtil.convertToSimpleBarChartOption(ct.reduceSeq, chartNode, 'line'));
