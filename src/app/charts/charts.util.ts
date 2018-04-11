@@ -492,9 +492,9 @@ export class ChartsUtil {
 
         
         pivots.forEach((c: any) => {
-            indicator.push({name: c.name, max: 120});
+            indicator.push({name: c, max: 120});
         });
-
+        console.log(indicator);
         
         let option: any = {
             title: {
