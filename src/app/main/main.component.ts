@@ -31,7 +31,7 @@ import 'rxjs/add/operator/take';
                      style="overflow-y: auto; overflow-x: hidden;"
                 >
 	                <div class="row pb-3" style="height: 300px; border-bottom: #dee2e6 1px solid; overflow-y: auto;">
-                        <div class="col-12">
+                        <div class="col-12" *ngIf="activeChartGroup?.treeOptions?.treeOptions">
                             <div echarts [options]="activeChartGroup.treeOptions.treeOptions" (chartClick)="onTreeClick($event.data)"></div>
                         </div>
 	                </div>
@@ -50,10 +50,7 @@ export class MainComponent {
 		id: 'empty',
 		name: '(empty)',
 		entity: undefined,
-		treeOptions: {
-			tree: null,
-			treeOptions: null
-		},
+		treeOptions: null,
 		chartOptions: []
 	};
 
@@ -115,8 +112,8 @@ export class MainComponent {
 	}
 
 	private resetChartGroups(): void {
-		this.chartGroups = [this.EmptyChartGroup];
-		this.activeChartGroup = this.EmptyChartGroup;
+		this.activeChartGroup = {...this.EmptyChartGroup};
+		this.chartGroups = [this.activeChartGroup];
 		this.storage.clearAll();
 	}
 
