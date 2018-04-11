@@ -4,8 +4,8 @@ import { ChartsUtil } from '../charts/charts.util';
 import { LineChartOption } from '../charts/lineChart.component';
 import { MultiLineChartOption } from '../charts/multiLineChart.component';
 import { ChartTree } from '../chart-tree/chart-tree';
-import { rawData, metaData, reduceSeq } from '../data/portfolio.data';
-import { ChartNode } from '../chart-tree/entity';
+import { rawData, metaData, reduceSeq } from '../data/human.data';
+import { ChartNode, Property } from '../chart-tree/entity';
 
 @Component({
 	selector: 'app-test-david',
@@ -36,12 +36,19 @@ export class TestDavidComponent {
 
 				let index: number = 0
 				chartData.forEach((e: any) => {
-					let chartType: number = e.type.find((t: any) => {
-						return t === 2;
+					let chartType: number = e.type.forEach((t: any) => {
+						if (t === 2) {
+							this.buildPieCharts(node, e.reduceSeq);
+						}
+						else if(t === 3 || t === 1) {
+							// line/bar chart
+
+						}
+						else if(t === 4 || t === 5) {
+							// multiLine/multiBar bar
+
+						}
 					});
-					if(chartType && e.reduceSeq.length === 1) {
-						this.buildPieCharts(node, chartData, index);
-					}
 
 					index++;
 				});
@@ -49,47 +56,7 @@ export class TestDavidComponent {
 		};
 	}
 
-	buildPieCharts(node: ChartNode, chartData: any, index): void {
-		let legendData: Array<any> = [];
-		let seriesData: Array<any> = [];
-		node.children.forEach((e: any) => {
-			legendData.push(e.name);
-			seriesData.push({value: e.value, name: e.name});
-		});
-
-		let option: any = {
-			title : {
-				text: chartData[0].reduceSeq[index].name,
-				subtext: '',
-				x:'center'
-			},
-            tooltip : {
-                trigger: "item",
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
-            legend: {
-                orient: 'vertical',
-                left: 'left',
-                data: legendData
-            },
-            series : [
-                {
-                    name: chartData[0].reduceSeq[index].name,
-                    type: 'pie',
-                    radius : '55%',
-                    center: ['50%', '60%'],
-                    data: seriesData,
-                    itemStyle: {
-                        emphasis: {
-                            shadowBlur: 10,
-                            shadowOffsetX: 0,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                        }
-                    }
-                }
-            ]
-		};
-		
-		this.gOption = option;
+	buildPieCharts(node: ChartNode, reduceSeqData: Array<Property>): void {
+		this.gOption = ChartsUtil.convertChartNodeToPieNode(node, reduceSeqData);
 	}
 }
