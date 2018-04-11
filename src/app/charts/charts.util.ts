@@ -16,8 +16,14 @@ export class ChartsUtil {
 		});
 
         return {
-            xAxis: {},
-            yAxis: {},
+            xAxis: {
+                type: 'value',
+                name: pivotValues[0]
+            },
+            yAxis: {
+                type: 'value',
+                name: pivotValues[1]
+            },
             series: [{
                 symbolSize: 20,
                 data: data,
@@ -90,16 +96,11 @@ export class ChartsUtil {
 
             data.push(a);
         });
-        console.log(chartNode);
-        
-        console.log(data);
-        
-
         return {
 			tooltip : barTooltip,
             
             visualMap: {
-                max: 20,
+                max: 100,
                 inRange: {
                     color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
                 }
@@ -107,19 +108,20 @@ export class ChartsUtil {
 			toolbox: barToolBox,
             
             xAxis3D: {
-                type: 'value'
-                // data: hours,
-                // name: 'abc'
+                type: 'value',
+                name: pivotValues[0]
             },
             legend: {
                 orient: 'vertical',
                 left: 'right',
             },
             yAxis3D: {
-                type: 'value'
+                type: 'value',
+                name: pivotValues[1]
             },
             zAxis3D: {
-                type: 'value'
+                type: 'value',
+                name: pivotValues[2]
             },
             grid3D: {
                 boxWidth: 200,
@@ -223,7 +225,7 @@ export class ChartsUtil {
 			return;
 		}
 		let labels: any = dimLabels;
-		let title: string = reduceSeq.map((r: Property) => r.name).join(' ');
+		let title: string = "";
 		let xAxisLabels: string[] = labels[0]; // x axis label, should be the first dimension
 		let subBarLabels: string[] = labels[1];
 		let barData: any = [];
@@ -267,13 +269,13 @@ export class ChartsUtil {
 		let title: string;
 		let barData: any;
 		if (reduceSeq && reduceSeq.length > 0) {
-			title = reduceSeq[0].name;
+			title = "";
 			barData = [{
 				name: reduceSeq[0].name,
 				data: data
 			}];
 		} else {
-			title = chartNode.name;
+			title = "";
 			barData = [{
 				name: chartNode.name,
 				data: [chartNode.value]
@@ -498,7 +500,7 @@ export class ChartsUtil {
         
         let option: any = {
             title: {
-                text: 'Radar Chart'
+                // text: 'Radar Chart'
             },
             tooltip: {},
             legend: {
