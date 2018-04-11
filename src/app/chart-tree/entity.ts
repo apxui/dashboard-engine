@@ -8,8 +8,9 @@ export enum ChartType {
 	Line = 1,
 	Pie,
 	Bar,
-	multiLine,
-	multiBar
+	MultiLine,
+	MultiBar,
+	NestedPie
 }
 
 export class Property {
@@ -19,7 +20,7 @@ export class Property {
 
 export class TypeResult {
 	reduceSeq: Array<Property>;
-	type: Array<ChartType>
+	type: Array<ChartType>;
 }
 
 export class ChartNode {

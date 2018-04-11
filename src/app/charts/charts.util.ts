@@ -43,7 +43,7 @@ export class ChartsUtil {
 						}
 					},
 	
-					expandAndCollapse: true,
+					expandAndCollapse: false,
 					animationDuration: 550,
 					animationDurationUpdate: 750
 				}
@@ -170,15 +170,14 @@ export class ChartsUtil {
                 }]
             };
     }
-
-    public static convertToBarOption(_title: string, _series: {name: string, data: number[]}[], _xAxisLabel: string[]): any {
+    public static convertToBarOption(_title: string, _series: {name: string, data: number[]}[], _xAxisLabel: string[], _subBarlabels?: string[]): any {
 		return  {
 			title : {
 				text: _title
 			},
 			tooltip : barTooltip,
 			legend: {
-				data:_series.map((s: any) => s.name)
+				data: _subBarlabels == null ? [] : _subBarlabels
 			},
 			toolbox: barToolBox,
 			calculable : true,

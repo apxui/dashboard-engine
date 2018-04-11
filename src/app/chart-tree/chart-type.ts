@@ -1,13 +1,13 @@
 import { ChartType, Property, TypeResult } from './entity';
 
 export class ChartTypeDecider {
-    private _reduceSeq: Array<Property>
+    private _reduceSeq: Array<Property>;
 
     private _dimensionChartTable: any = {
         '2': [ChartType.Line],
         '3': [ChartType.Pie, ChartType.Bar],
-        '33': [ChartType.multiBar],
-        '32': [ChartType.multiLine]
+        '33': [ChartType.MultiBar, ChartType.NestedPie],
+        '32': [ChartType.MultiLine]
     }
 
     public decideType(reduceSeq: Array<Property>): TypeResult {
