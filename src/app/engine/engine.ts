@@ -10,33 +10,34 @@ export class DashboardEngine {
         return mainTreeOption;
     }
     public static createChartOption(chartTypes: TypeResult[], chartNode: ChartNode, dimLabels: any): any {
-        // this.chartList = [];
+        let result: any[] = [];
         if (chartTypes && chartTypes.length > 0) {
             chartTypes.forEach((ct: TypeResult) => {
                 // to-do
                 if (ct.type.indexOf(ChartType.Pie) >= 0) {
                     let pieOption: any = ChartsUtil.convertChartNodeToPieNode(chartNode, ct.reduceSeq);
-                    return pieOption;
+                    result.push[pieOption];
                 }
                 if (ct.type.indexOf(ChartType.NestedPie) >= 0) {
                     let nestedPieOption: any = ChartsUtil.convertChartNodeToNestedPieNode(chartNode, ct.reduceSeq);
-                    return nestedPieOption;
+                    result.push[nestedPieOption];
                 }
                 if (ct.type.indexOf(ChartType.Bar) >= 0) {
-                    return ChartsUtil.convertToSimpleBarChartOption(ct.reduceSeq, chartNode, 'bar');
+                    result.push[ChartsUtil.convertToSimpleBarChartOption(ct.reduceSeq, chartNode, 'bar')];
                 }
                 if (ct.type.indexOf(ChartType.MultiBar) >= 0) {
-                    return ChartsUtil.convertToMultiBarChartOption(ct.reduceSeq, chartNode, dimLabels[chartTypes.indexOf(ct)], 'bar');
+                    result.push[ChartsUtil.convertToMultiBarChartOption(ct.reduceSeq, chartNode, dimLabels[chartTypes.indexOf(ct)], 'bar')];
                 }
                 if (ct.type.indexOf(ChartType.Line) >= 0) {
-                    return ChartsUtil.convertToSimpleBarChartOption(ct.reduceSeq, chartNode, 'line');
+                    result.push[ChartsUtil.convertToSimpleBarChartOption(ct.reduceSeq, chartNode, 'line')];
                 }
                 if (ct.type.indexOf(ChartType.MultiLine) >= 0) {
-                    return ChartsUtil.convertToMultiBarChartOption(ct.reduceSeq, chartNode, dimLabels[chartTypes.indexOf(ct)], 'line');
+                    result.push[ChartsUtil.convertToMultiBarChartOption(ct.reduceSeq, chartNode, dimLabels[chartTypes.indexOf(ct)], 'line')];
                 }
             })
+            return result;
         } else {
-            return ChartsUtil.convertToSimpleBarChartOption([], chartNode, 'bar');
+            return [ChartsUtil.convertToSimpleBarChartOption([], chartNode, 'bar')];
         }
     }
 }

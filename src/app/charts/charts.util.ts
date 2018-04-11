@@ -286,7 +286,7 @@ export class ChartsUtil {
                 }]
             };
 	}
-	public static convertToMultiBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, dimLabels: any, type: string): void {
+	public static convertToMultiBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, dimLabels: any, type: string): any {
 		if (reduceSeq.length > 2) {
 			console.warn('not support');
 			return;
@@ -310,7 +310,7 @@ export class ChartsUtil {
 
 		return ChartsUtil.convertToBarOption(type, title, barData, xAxisLabels, subBarLabels);
 	}
-	public static convertToSimpleBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, type: string): void {
+	public static convertToSimpleBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, type: string): any {
 		let xAxisLabels: string[] = chartNode.children.map((e: ChartNode) => e.name);
 		let data: any[] = chartNode.children.map((e: ChartNode) => e.value);
 		let title: string;
