@@ -12,11 +12,13 @@ import { ChartNode, Property } from '../chart-tree/entity';
 	template: `
 		<base-chart [options]="treeOption"></base-chart>
 		<basic-line [options]="gOption"></basic-line>
+		<basic-line [options]="pOption"></basic-line>
 	`
 })
 export class TestDavidComponent {
 	treeOption: any;
 	gOption: any;
+	pOption: any;
 
 	constructor() {
 		this.buildMainTree();
@@ -34,7 +36,6 @@ export class TestDavidComponent {
 				let chartData: any = mainTree.getChartTypeForNode(node);
 				console.log(JSON.stringify(chartData));
 
-				let index: number = 0
 				chartData.forEach((e: any) => {
 					let chartType: number = e.type.forEach((t: any) => {
 						if (t === 2) {
@@ -44,13 +45,11 @@ export class TestDavidComponent {
 							// line/bar chart
 
 						}
-						else if(t === 4 || t === 5) {
+						else if(t === 6) {
 							// multiLine/multiBar bar
-
+							this.buildNestedPieCharts(node, e.reduceSeq);
 						}
 					});
-
-					index++;
 				});
 			}
 		};
@@ -58,5 +57,9 @@ export class TestDavidComponent {
 
 	buildPieCharts(node: ChartNode, reduceSeqData: Array<Property>): void {
 		this.gOption = ChartsUtil.convertChartNodeToPieNode(node, reduceSeqData);
+	}
+
+	buildNestedPieCharts(node: ChartNode, reduceSeqData: Array<Property>): void {
+		this.pOption = ChartsUtil.convertChartNodeToNestedPieNode(node, reduceSeqData);
 	}
 }

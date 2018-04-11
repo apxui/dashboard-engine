@@ -240,7 +240,7 @@ export class ChartsUtil {
             },
             legend: {
                 orient: 'vertical',
-                left: 'left',
+                left: 'right',
                 data: legendData
             },
             series : [
@@ -257,6 +257,96 @@ export class ChartsUtil {
                             shadowColor: 'rgba(0, 0, 0, 0.5)'
                         }
                     }
+                }
+            ]
+        };
+        
+        return option;
+    }
+
+    // nested pie
+    public static convertChartNodeToNestedPieNode(node: ChartNode, reduceSeqData: Array<Property>): any {
+        let legendData: Array<any> = [];
+        let series1Data: Array<any> = [];
+        let series2Data: Array<any> = [];
+
+		node.children.forEach((e: any) => {
+            legendData.push(e.name);
+
+            e.children.forEach((c: any) => {
+                legendData.push(c.name);
+                series2Data.push({value: c.value, name: c.name});
+            });
+
+            series1Data.push({value: e.value, name: e.name});
+        });
+
+		let option: any = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                data: legendData
+            },
+            series: [
+                {
+                    name: reduceSeqData[0].name,
+                    type:'pie',
+                    selectedMode: 'single',
+                    radius: [0, '40%'],
+        
+                    label: {
+                        normal: {
+                            position: 'inner'
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: series1Data
+                },
+                {
+                    name: reduceSeqData[1].name,
+                    type:'pie',
+                    radius: ['50%', '70%'],
+                    label: {
+                        normal: {
+                            formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                            backgroundColor: '#eee',
+                            borderColor: '#aaa',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            rich: {
+                                a: {
+                                    color: '#999',
+                                    lineHeight: 22,
+                                    align: 'center'
+                                },
+                                hr: {
+                                    borderColor: '#aaa',
+                                    width: '100%',
+                                    borderWidth: 0.5,
+                                    height: 0
+                                },
+                                b: {
+                                    fontSize: 16,
+                                    lineHeight: 33
+                                },
+                                per: {
+                                    color: '#eee',
+                                    backgroundColor: '#334455',
+                                    padding: [2, 4],
+                                    borderRadius: 2
+                                }
+                            }
+                        }
+                    },
+                    data: series2Data
                 }
             ]
         };
