@@ -9,11 +9,11 @@ export let rawData: Array<any> = [
         country: "China",
         identityNo: "1",
         house: 1,
-        IQ: 100,
+        IQ: 10,
         EQ: 89,
         FQ: 39,
         SQ: 89,
-        BQ: 100,
+        BQ: 10,
         AQ: 34
     },
     {
@@ -25,7 +25,7 @@ export let rawData: Array<any> = [
         house: 1,
         IQ: 46,
         EQ: 45,
-        FQ: 354,
+        FQ: 35,
         SQ: 24,
         BQ: 56,
         AQ: 45
@@ -37,7 +37,7 @@ export let rawData: Array<any> = [
         country: "China",
         identityNo: "3",
         house: 1,
-        IQ: 100,
+        IQ: 29,
         EQ: 23,
         FQ: 39,
         SQ: 66,
@@ -97,7 +97,7 @@ export let rawData: Array<any> = [
         EQ: 68,
         FQ: 78,
         SQ: 97,
-        BQ: 678,
+        BQ: 67,
         AQ: 78
     },
     {
@@ -122,7 +122,7 @@ export let rawData: Array<any> = [
         identityNo: "9",
         house: 1,
         IQ: 46,
-        EQ: 654,
+        EQ: 65,
         FQ: 65,
         SQ: 65,
         BQ: 98,
@@ -235,7 +235,7 @@ export let rawData: Array<any> = [
         house: 1,
         IQ: 46,
         EQ: 89,
-        FQ: 465,
+        FQ: 46,
         SQ: 98,
         BQ: 54,
         AQ: 32
@@ -263,7 +263,7 @@ export let rawData: Array<any> = [
         house: 1,
         IQ: 76,
         EQ: 89,
-        FQ: 456,
+        FQ: 45,
         SQ: 23,
         BQ: 45,
         AQ: 78
@@ -279,7 +279,7 @@ export let rawData: Array<any> = [
         EQ: 78,
         FQ: 56,
         SQ: 12,
-        BQ: 789,
+        BQ: 78,
         AQ: 54
     },
     {
@@ -292,8 +292,8 @@ export let rawData: Array<any> = [
         IQ: 65,
         EQ: 98,
         FQ: 65,
-        SQ: 321,
-        BQ: 654,
+        SQ: 32,
+        BQ: 65,
         AQ: 87
     },
     {
@@ -305,9 +305,9 @@ export let rawData: Array<any> = [
         house: 1,
         IQ: 87,
         EQ: 65,
-        FQ: 1859,
-        SQ: 984,
-        BQ: 651,
+        FQ: 18,
+        SQ: 98,
+        BQ: 65,
         AQ: 21
     },
     {
@@ -361,8 +361,8 @@ export let rawData: Array<any> = [
         house: 1,
         IQ: 76,
         EQ: 89,
-        FQ: 456,
-        SQ: 652,
+        FQ: 45,
+        SQ: 65,
         BQ: 87,
         AQ: 51
     },
@@ -376,7 +376,7 @@ export let rawData: Array<any> = [
         IQ: 98,
         EQ: 65,
         FQ: 87,
-        SQ: 2,
+        SQ: 26,
         BQ: 32,
         AQ: 68
     },
@@ -389,10 +389,10 @@ export let rawData: Array<any> = [
         house: 1,
         IQ: 64,
         EQ: 98,
-        FQ: 6352,
+        FQ: 62,
         SQ: 98,
-        BQ: 321,
-        AQ: 854
+        BQ: 32,
+        AQ: 85
     },
     {
         name: "Harry",
@@ -405,7 +405,7 @@ export let rawData: Array<any> = [
         EQ: 65,
         FQ: 87,
         SQ: 51,
-        BQ: 854,
+        BQ: 85,
         AQ: 87
     },
     {
@@ -432,7 +432,7 @@ export let rawData: Array<any> = [
         IQ: 97,
         EQ: 64,
         FQ: 21,
-        SQ: 874,
+        SQ: 84,
         BQ: 87,
         AQ: 94
     },
@@ -444,10 +444,10 @@ export let rawData: Array<any> = [
         identityNo: "32",
         house: 1,
         IQ: 97,
-        EQ: 654,
+        EQ: 65,
         FQ: 54,
-        SQ: 987,
-        BQ: 541,
+        SQ: 97,
+        BQ: 54,
         AQ: 21
     },
     {
@@ -462,7 +462,7 @@ export let rawData: Array<any> = [
         FQ: 87,
         SQ: 54,
         BQ: 65,
-        AQ: 987
+        AQ: 98
     },
     {
         name: "Nomic",
@@ -473,7 +473,7 @@ export let rawData: Array<any> = [
         house: 1,
         IQ: 64,
         EQ: 87,
-        FQ: 514,
+        FQ: 51,
         SQ: 21,
         BQ: 54,
         AQ: 87
@@ -489,8 +489,8 @@ export let rawData: Array<any> = [
         EQ: 98,
         FQ: 87,
         SQ: 54,
-        BQ: 6,
-        AQ: 321
+        BQ: 60,
+        AQ: 32
     },
     {
         name: "Betty",
@@ -503,7 +503,7 @@ export let rawData: Array<any> = [
         EQ: 98,
         FQ: 87,
         SQ: 54,
-        BQ: 651,
+        BQ: 65,
         AQ: 98
     },
     {
@@ -518,7 +518,7 @@ export let rawData: Array<any> = [
         FQ: 87,
         SQ: 54,
         BQ: 98,
-        AQ: 651
+        AQ: 65
     },
     {
         name: "Hilary",
@@ -527,9 +527,9 @@ export let rawData: Array<any> = [
         country: "China",
         identityNo: "38",
         house: 1,
-        IQ: 654,
-        EQ: 987,
-        FQ: 541,
+        IQ: 65,
+        EQ: 98,
+        FQ: 54,
         SQ: 21,
         BQ: 54,
         AQ: 87
@@ -603,11 +603,10 @@ export let reduceSeq: Array<any> = [
 ];
 
 export let pivotValues: Array<string> = [
-    // "IQ",
-    // "EQ",
-    // "FQ",
-    // "SQ",
-    // "BQ",
-    // "AQ"
-    "house"
+    "IQ",
+    "EQ",
+    "FQ",
+    "SQ",
+    "BQ",
+    "AQ"
 ]

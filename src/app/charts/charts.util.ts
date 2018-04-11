@@ -416,32 +416,27 @@ export class ChartsUtil {
     }
 
     // radar chart
-    public static convertChartNodeToRadarChartNode(node: ChartNode, reduceSeqData: Array<Property>): any {
+    public static convertChartNodeToRadarChartNode(node: ChartNode, pivots: Array<string>): any {
         let legendData: Array<any> = [];
         let seriesData: Array<any> = [];
         let indicator: Array<any> = [];
         let maxData: Array<number> = [];
         let maxValue: number = 0;
 
-		node.children.forEach((e: any) => {
+		node.data.forEach((e: any) => {
             legendData.push(e.name);
             
             let d: Array<any> = [];
-            e.children.forEach((c: any) => {
-                maxData.push(Number(c.value));
-                d.push(Number(c.value));
+            pivots.forEach((c: any) => {
+                d.push(Number(e[c]));
             });
 
 			seriesData.push({value: d, name: e.name});
         });
-        
-        maxData.sort();    
-        let max: number = maxData[maxData.length] + 100; 
 
-        node.children.forEach((e: any) => {
-            e.children.forEach((c: any) => {
-                indicator.push({name: c.name, max: max});
-            });
+        
+        pivots.forEach((c: any) => {
+            indicator.push({name: c.name, max: 120});
         });
 
         
@@ -474,6 +469,8 @@ export class ChartsUtil {
                 data: seriesData
             }]
         };
+
+        console.log(option);
 
         return option;
     }
