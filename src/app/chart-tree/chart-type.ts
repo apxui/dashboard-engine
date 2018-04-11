@@ -12,6 +12,8 @@ export class ChartTypeDecider {
 
     public decideType(reduceSeq: Array<Property>): TypeResult {
         this._reduceSeq = reduceSeq;
+        
+
         let reduceSeqStr: string = this.convertReduceSeqToStr();
         if (this._dimensionChartTable[reduceSeqStr]) {
             return {

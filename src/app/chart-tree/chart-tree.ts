@@ -36,6 +36,7 @@ export class ChartTree {
 		this._reduceSeq = reduceseq;
 		this._pivotValues = pivotValues;
 		this.buildTree();
+		console.log(this._rootNode);
 		return this._rootNode;
 	}
 
@@ -95,12 +96,21 @@ export class ChartTree {
 		
 		while (queue.length !== 0) {
 			let node: ChartNode = queue.shift();
-			this._pivotValues.forEach((pv: string) => {
-				node[pv] = node.data.reduce((sumVal, item) => {
-					sumVal += item[pv];
+			if (this._pivotValues.length == 1) {
+				let p: string = this._pivotValues[0];
+				node.value = node.data.reduce((sumVal, item) => {
+					sumVal += item[p];
 					return sumVal;
 				}, 0);
-			});
+			} else {
+				this._pivotValues.forEach((pv: string) => {
+					node[pv] = node.data.reduce((sumVal, item) => {
+						sumVal += item[pv];
+						return sumVal;
+					}, 0);
+				});
+			}
+			
 			node.children.forEach(item => queue.push(item));
 		}	
 	}

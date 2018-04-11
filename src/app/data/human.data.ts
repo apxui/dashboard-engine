@@ -36,7 +36,7 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "3",
-        house: 451,
+        house: 1,
         IQ: 100,
         EQ: 23,
         FQ: 39,

@@ -40,4 +40,5 @@ export class ChartNode {
 	data: Array<any>;
 	children: Array<ChartNode>;
 	parent: ChartNode;
+	value: number;
 }

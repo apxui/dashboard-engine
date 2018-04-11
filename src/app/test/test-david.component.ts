@@ -4,7 +4,7 @@ import { ChartsUtil } from '../charts/charts.util';
 import { LineChartOption } from '../charts/lineChart.component';
 import { MultiLineChartOption } from '../charts/multiLineChart.component';
 import { ChartTree } from '../chart-tree/chart-tree';
-import { rawData, metaData, reduceSeq } from '../data/human.data';
+import { rawData, metaData, reduceSeq, pivotValues } from '../data/human.data';
 import { ChartNode, Property } from '../chart-tree/entity';
 
 @Component({
@@ -26,7 +26,7 @@ export class TestDavidComponent {
 
 	buildMainTree(): void {
 		let mainTree: ChartTree = new ChartTree();
-		let mainTreeData: any = mainTree.buildAndGetRootnode(rawData, metaData, reduceSeq);
+		let mainTreeData: any = mainTree.buildAndGetRootnode(rawData, metaData, reduceSeq, pivotValues);
 		let mainTreeOption: any = ChartsUtil.convertToTreeOption(mainTreeData);
 		this.treeOption = {
 			option: mainTreeOption,
