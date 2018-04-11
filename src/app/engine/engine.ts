@@ -7,21 +7,21 @@ export class DashboardEngine {
 		let mainTree: ChartTree = new ChartTree();
 		let mainTreeData: any = mainTree.buildAndGetRootnode(rawdata, metadata, reduceseq, pivotValues);
 		let mainTreeOption: any = ChartsUtil.convertToTreeOption(mainTreeData);
-
-		return {
-			option: mainTreeOption,
-			onTreeClickHandler: (treeNodeData: any) => {
-				let node: ChartNode = mainTree.getNode(treeNodeData.uid);
-				let chartTypes: TypeResult[] = mainTree.getChartTypeForNode(node);
-				console.log(node);
-				console.log(chartTypes);
-				// let dimLabels: any = [];
-				// chartTypes.forEach((ct: TypeResult) => {
-				// 	dimLabels.push(ct.reduceSeq.map((dim: Property) => mainTree.getAllPropertiesByDim(dim.name)));
-				// });
-				// this._createCharts(chartTypes, node, dimLabels);
-			}
-		};
+        return mainTreeOption;
+		// return {
+		// 	option: mainTreeOption,
+		// 	onTreeClickHandler: (treeNodeData: any) => {
+		// 		let node: ChartNode = mainTree.getNode(treeNodeData.uid);
+		// 		let chartTypes: TypeResult[] = mainTree.getChartTypeForNode(node);
+		// 		console.log(node);
+		// 		console.log(chartTypes);
+		// 		// let dimLabels: any = [];
+		// 		// chartTypes.forEach((ct: TypeResult) => {
+		// 		// 	dimLabels.push(ct.reduceSeq.map((dim: Property) => mainTree.getAllPropertiesByDim(dim.name)));
+		// 		// });
+		// 		// this._createCharts(chartTypes, node, dimLabels);
+		// 	}
+		// };
     }
     // public static _createCharts(chartTypes: TypeResult[], chartNode: ChartNode, dimLabels: any) {
 	// 	// this.chartList = [];
