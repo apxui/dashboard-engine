@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { WizardComponent } from './wizard.component';
 import { WizardService } from './wizard.service';
@@ -9,7 +9,8 @@ import { WizardService } from './wizard.service';
 	imports: [
 		BrowserModule,
 		CommonModule,
-		FormsModule
+		FormsModule,
+		ReactiveFormsModule
 	],
 	providers: [
 		WizardService

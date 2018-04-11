@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { SupportedEntities } from '../main/main.constants';
 import { WizardService } from './wizard.service';
@@ -7,21 +8,35 @@ import { WizardService } from './wizard.service';
 	selector: 'app-wizard',
 	styleUrls: ['./wizard.component.scss'],
 	template: `
-		<div>
-            <div class="sticky-top px-3 pt-3 pb-1" style="background-color: white;">
-                <h6>Let's begin with a survey :)</h6>
-            </div>
-            <div class="px-3 pt-1 pb-3">
-                <div class="mb-2" *ngFor="let e of supportedEntities">
-                    <button class="entity-button btn btn-outline-secondary" (click)="onChooseEntity(e)">{{e}}</button>
+		<form [formGroup]="form" (ngSubmit)="onRun()">
+            <div>
+                <div class="sticky-top px-3 pt-3 pb-1" style="background-color: white;">
+                    <h6>Let's begin with a survey :)</h6>
+                </div>
+                <div class="px-3 pt-1 pb-3">
+                    <div class="form-group">
+                        <label>Which data are you interested in?</label>
+                        <select class="form-control" formControlName="entity">
+                            <option *ngFor="let e of supportedEntities">{{e}}</option>
+                        </select>
+                    </div>
+	                <div class="form-group">
+                        <label>Which value do you care the most?</label>
+                        <div class="form-check" *ngFor="let vf of VFields">
+                            <input class="form-check-input" type="radio" name="pivotVField" value="option1" checked>
+                            <label class="form-check-label">
+                                {{vf}}
+                            </label>
+                        </div>
+	                </div>
                 </div>
             </div>
-		</div>
-		<div class="action-buttons px-3 pb-3 pt-1">
-            <button type="button" class="action-button btn btn-primary mb-1" (click)="onRun()">Run</button>
-            <button type="button" class="action-button btn btn-secondary mb-3" (click)="onRunNew()">Run in new tab</button>
-            <button type="button" class="action-button btn btn-outline-danger" (click)="onCloseAll()">Close all tabs</button>
-		</div>
+            <div class="action-buttons px-3 pb-3 pt-1">
+                <button type="button" class="action-button btn btn-primary mb-1" (click)="onRun()">Run</button>
+                <button type="button" class="action-button btn btn-secondary mb-3" (click)="onRunNew()">Run in new tab</button>
+                <button type="button" class="action-button btn btn-outline-danger" (click)="onCloseAll()">Close all tabs</button>
+            </div>
+		</form>
 	`
 })
 export class WizardComponent {
@@ -32,9 +47,12 @@ export class WizardComponent {
 
 	readonly supportedEntities: string[] = SupportedEntities.ALL;
 
-	entity: string;
+	entity: string = SupportedEntities.Humans;
 	pivotVField: string;
+	VFields: string[];
 	otherFields: string[];
+
+	form: FormGroup = new FormGroup({});
 
 	constructor(private wizardService: WizardService) {
 
