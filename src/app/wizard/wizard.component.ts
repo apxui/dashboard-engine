@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
+import { Dimension } from '../chart-tree/entity';
+import { metaData as humanMeta, rawData as humanData } from '../data/human.data';
+import { metaData as portfolioMeta, rawData as portfolioData } from '../data/portfolio.data';
 import { SupportedEntities } from '../main/main.constants';
 import { WizardService } from './wizard.service';
 
@@ -8,30 +11,36 @@ import { WizardService } from './wizard.service';
 	selector: 'app-wizard',
 	styleUrls: ['./wizard.component.scss'],
 	template: `
-		<form [formGroup]="form" (ngSubmit)="onRun()">
-            <div>
-                <div class="sticky-top px-3 pt-3 pb-1" style="background-color: white;">
-                    <h6>Let's begin with a survey :)</h6>
-                </div>
-                <div class="px-3 pt-1 pb-3">
-                    <div class="form-group">
-                        <label>Which data are you interested in?</label>
-                        <select class="form-control" [formControlName]="'entity'">
-                            <option *ngFor="let e of supportedEntities" [value]="e">{{e}}</option>
-                        </select>
-                    </div>
-	                <div class="form-group">
-                        <label>Which values do you care the most?</label>
-                        
-	                </div>
+        <div class="wizard-top px-3 pt-3 pb-1" style="background-color: white; border-bottom: 1px solid #dee2e6;">
+            <h6 class="text-info">Let's begin with a survey :)</h6>
+        </div>
+        <div class="wizard-body px-3 py-3">
+            <div class="form-group mb-4">
+                <h6>Which data are you interested in?</h6>
+                <select class="form-control" [(ngModel)]="selectedEntity" (ngModelChange)="onSelectEntity($event)">
+                    <option *ngFor="let e of supportedEntities" [value]="e">{{e}}</option>
+                </select>
+            </div>
+            <div class="form-group row mb-4" *ngIf="allVFields.length > 0">
+                <h6>Which values do you care the most?</h6>
+                <div class="form-check col-sm-6" *ngFor="let vf of allVFields">
+                    <input class="form-check-input" type="checkbox" (click)="onSelectVField(vf.name)">
+                    <label class="form-check-label">{{vf.name}}</label>
                 </div>
             </div>
-            <div class="action-buttons px-3 pb-3 pt-1">
-                <button type="button" class="action-button btn btn-primary mb-1" (click)="onRun()">Run</button>
-                <button type="button" class="action-button btn btn-secondary mb-3" (click)="onRunNew()">Run in new tab</button>
-                <button type="button" class="action-button btn btn-outline-danger" (click)="onCloseAll()">Close all tabs</button>
+            <div class="form-group row mb-4" *ngIf="allOtherFields.length > 0">
+                <h6>How would you put these fields in order?</h6>
+                <div class="form-check col-sm-6" *ngFor="let vf of allOtherFields">
+                    <input class="form-check-input" type="checkbox" (click)="onSelectOtherFields(vf.name)">
+                    <label class="form-check-label">{{vf.name}}</label>
+                </div>
             </div>
-		</form>
+        </div>
+        <div class="wizard-bottom px-3 pb-3 pt-3" style="background-color: white; border-top: 1px solid #dee2e6;">
+            <button type="button" class="action-button btn btn-primary mb-1" (click)="onRun()">Run</button>
+            <button type="button" class="action-button btn btn-secondary mb-3" (click)="onRunNew()">Run in new tab</button>
+            <button type="button" class="action-button btn btn-outline-danger" (click)="onCloseAll()">Close all tabs</button>
+        </div>
 	`
 })
 export class WizardComponent {
@@ -42,39 +51,111 @@ export class WizardComponent {
 
 	readonly supportedEntities: string[] = SupportedEntities.ALL;
 
-	selectedVFields: string[];
-	selectedOtherFields: string[];
+	selectedEntity: string = SupportedEntities.Humans;
+	selectedVFields: string[] = [];
+	selectedOtherFields: string[] = [];
 
-	allVFields: string[];
-	allTFields: string[];
-	allPFields: string[];
+	allVFields: {name: string, dimension: Dimension}[] = [];
+	allTFields: {name: string, dimension: Dimension}[] = [];
+	allPFields: {name: string, dimension: Dimension}[] = [];
+	allOtherFields: {name: string, dimension: Dimension}[] = [];
 
-	form: FormGroup;
+	meta: any[];
+	data: any[];
 
-	constructor(private fb: FormBuilder) {
-		this.form = this.fb.group({
-			entity: SupportedEntities.Humans
-		});
+	constructor() {
+		this.loadData();
+	}
+
+	onSelectEntity(entity: string): void {
+		this.selectedEntity = entity;
+		this.loadData();
+	}
+
+	onSelectVField(field: string): void {
+		const index: number = this.selectedVFields.indexOf(field);
+		if (index === -1) {
+			this.selectedVFields.push(field);
+		} else {
+			this.selectedVFields.splice(index, 1);
+		}
+		this.updateOtherFields();
+	}
+
+	onSelectOtherFields(field: string): void {
+		const index: number = this.selectedOtherFields.indexOf(field);
+		if (index === -1) {
+			this.selectedOtherFields.push(field);
+		} else {
+			this.selectedOtherFields.splice(index, 1);
+		}
+	}
+
+	updateOtherFields(): void {
+		const otherV: {name: string, dimension: Dimension}[] = this.allVFields.filter(vf => this.selectedVFields.indexOf(vf.name) === -1);
+		this.allOtherFields = [...this.allTFields, ...this.allPFields, ...otherV];
+	}
+
+	loadData(): void {
+		let meta: any[];
+		let data: any[];
+		switch (this.selectedEntity) {
+			case SupportedEntities.Humans: {
+				meta = humanMeta;
+				data = humanData;
+				break;
+			}
+			case SupportedEntities.Portfolios: {
+				meta = portfolioMeta;
+				data = portfolioData;
+				break;
+			}
+			default:
+		}
+
+		if (meta) {
+			this.allVFields = meta.filter(md => md.dimension === Dimension.Value);
+			this.allTFields = meta.filter(md => md.dimension === Dimension.Time);
+			this.allPFields = meta.filter(md => md.dimension === Dimension.StaticProperty);
+		} else {
+			this.allVFields = [];
+			this.allTFields = [];
+			this.allPFields = [];
+		}
+
+		this.meta = meta;
+		this.data = data;
 	}
 
 	onRun(): void {
+		const tree: any = this.runEngine();
 		this.run.emit({
-			entity: this.form.get('entity').value,
-			treeOptions: null,
-			chartOptions: this.options()
+			entity: this.selectedEntity,
+			treeOptions: tree,
+			chartOptions: []
 		});
 	}
 
 	onRunNew(): void {
+		const tree: any = this.runEngine();
 		this.runNew.emit({
-			entity: this.form.get('entity').value,
-			treeOptions: null,
+			entity: this.selectedEntity,
+			treeOptions: tree,
 			chartOptions: this.options()
 		});
 	}
 
 	onCloseAll(): void {
 		this.closeAll.emit();
+	}
+
+	private runEngine(): any {
+		switch (this.selectedEntity) {
+			case SupportedEntities.Humans: break;
+			case SupportedEntities.Portfolios: break;
+			default:
+		}
+		return null;
 	}
 
 	options(): any[] {

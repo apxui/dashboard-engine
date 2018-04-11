@@ -1,15 +1,25 @@
 :host {
 	position: relative;
 	height: 100%;
-	display: block;
+	display: flex;
+	flex-flow: column;
 	overflow: hidden;
 }
 
-.action-buttons {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
+.wizard-top {
+	flex: 0 1 auto;
+	min-height: 50px;
+}
+
+.wizard-body {
+	flex: 1;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.wizard-bottom {
+	flex: 0 1 auto;
+	min-height: 50px;
 }
 
 .action-button {
