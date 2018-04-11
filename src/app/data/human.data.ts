@@ -1,4 +1,4 @@
-import { Dimension} from "../chart-tree/entity";
+import { Dimension } from "../chart-tree/entity";
 
 
 export let rawData: Array<any> = [
@@ -8,7 +8,13 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "1",
-        house: 1
+        house: 1,
+        IQ: 100,
+        EQ: 89,
+        FQ: 39,
+        SQ: 89,
+        BQ: 100,
+        AQ: 34
     },
     {
         name: "Jim",
@@ -16,7 +22,13 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "2",
-        house: 1
+        house: 1,
+        IQ: 46,
+        EQ: 45,
+        FQ: 354,
+        SQ: 24,
+        BQ: 56,
+        AQ: 45
     },
     {
         name: "David",
@@ -24,15 +36,27 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "3",
-        house: 1
-    }, 
+        house: 451,
+        IQ: 100,
+        EQ: 23,
+        FQ: 39,
+        SQ: 66,
+        BQ: 55,
+        AQ: 36
+    },
     {
         name: "Grace",
         gender: "female",
         birthYear: "1988",
         country: "China",
         identityNo: "4",
-        house: 1
+        house: 1,
+        IQ: 67,
+        EQ: 58,
+        FQ: 98,
+        SQ: 79,
+        BQ: 68,
+        AQ: 79
     },
     {
         name: "James",
@@ -40,7 +64,13 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "American",
         identityNo: "5",
-        house: 1
+        house: 1,
+        IQ: 58,
+        EQ: 89,
+        FQ: 39,
+        SQ: 68,
+        BQ: 98,
+        AQ: 78
     },
     {
         name: "Green",
@@ -48,7 +78,13 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "6",
-        house: 1
+        house: 1,
+        IQ: 98,
+        EQ: 78,
+        FQ: 67,
+        SQ: 56,
+        BQ: 78,
+        AQ: 89
     },
     {
         name: "Scott",
@@ -56,7 +92,13 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "China",
         identityNo: "7",
-        house: 1
+        house: 1,
+        IQ: 78,
+        EQ: 68,
+        FQ: 78,
+        SQ: 97,
+        BQ: 678,
+        AQ: 78
     },
     {
         name: "Park",
@@ -64,7 +106,13 @@ export let rawData: Array<any> = [
         birthYear: "1987",
         country: "American",
         identityNo: "8",
-        house: 1
+        house: 1,
+        IQ: 79,
+        EQ: 68,
+        FQ: 57,
+        SQ: 89,
+        BQ: 67,
+        AQ: 56
     },
     {
         name: "Helen",
@@ -72,7 +120,13 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "9",
-        house: 1
+        house: 1,
+        IQ: 46,
+        EQ: 654,
+        FQ: 65,
+        SQ: 65,
+        BQ: 98,
+        AQ: 89
     },
     {
         name: "Lucas",
@@ -80,7 +134,13 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "China",
         identityNo: "10",
-        house: 1
+        house: 1,
+        IQ: 78,
+        EQ: 78,
+        FQ: 98,
+        SQ: 98,
+        BQ: 65,
+        AQ: 65
     },
     {
         name: "Lily",
@@ -88,7 +148,13 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "11",
-        house: 1
+        house: 1,
+        IQ: 76,
+        EQ: 76,
+        FQ: 79,
+        SQ: 89,
+        BQ: 56,
+        AQ: 89
     },
     {
         name: "Clark",
@@ -96,7 +162,13 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "12",
-        house: 1
+        house: 1,
+        IQ: 46,
+        EQ: 56,
+        FQ: 56,
+        SQ: 89,
+        BQ: 79,
+        AQ: 79
     },
     {
         name: "William",
@@ -104,7 +176,13 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "American",
         identityNo: "13",
-        house: 1
+        house: 1,
+        IQ: 13,
+        EQ: 46,
+        FQ: 79,
+        SQ: 79,
+        BQ: 46,
+        AQ: 13
     },
     {
         name: "Shane",
@@ -112,7 +190,13 @@ export let rawData: Array<any> = [
         birthYear: "1986",
         country: "China",
         identityNo: "14",
-        house: 1
+        house: 1,
+        IQ: 35,
+        EQ: 65,
+        FQ: 98,
+        SQ: 65,
+        BQ: 32,
+        AQ: 57
     },
     {
         name: "Bing",
@@ -120,7 +204,13 @@ export let rawData: Array<any> = [
         birthYear: "1986",
         country: "American",
         identityNo: "15",
-        house: 1
+        house: 1,
+        IQ: 46,
+        EQ: 89,
+        FQ: 79,
+        SQ: 79,
+        BQ: 46,
+        AQ: 46,
     },
     {
         name: "Winston",
@@ -128,7 +218,13 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "16",
-        house: 1
+        house: 1,
+        IQ: 46,
+        EQ: 79,
+        FQ: 56,
+        SQ: 79,
+        BQ: 89,
+        AQ: 45
     },
     {
         name: "Nancy",
@@ -136,7 +232,13 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "China",
         identityNo: "17",
-        house: 1
+        house: 1,
+        IQ: 46,
+        EQ: 89,
+        FQ: 465,
+        SQ: 98,
+        BQ: 54,
+        AQ: 32
     },
     {
         name: "Maggie",
@@ -144,7 +246,13 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "American",
         identityNo: "18",
-        house: 1
+        house: 1,
+        IQ: 87,
+        EQ: 65,
+        FQ: 21,
+        SQ: 65,
+        BQ: 32,
+        AQ: 54
     },
     {
         name: "Lisa",
@@ -152,7 +260,13 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "19",
-        house: 1
+        house: 1,
+        IQ: 76,
+        EQ: 89,
+        FQ: 456,
+        SQ: 23,
+        BQ: 45,
+        AQ: 78
     },
     {
         name: "Cally",
@@ -160,7 +274,13 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "20",
-        house: 1
+        house: 1,
+        IQ: 56,
+        EQ: 78,
+        FQ: 56,
+        SQ: 12,
+        BQ: 789,
+        AQ: 54
     },
     {
         name: "Arnold",
@@ -168,7 +288,13 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "21",
-        house: 1
+        house: 1,
+        IQ: 65,
+        EQ: 98,
+        FQ: 65,
+        SQ: 321,
+        BQ: 654,
+        AQ: 87
     },
     {
         name: "Andrew",
@@ -176,15 +302,27 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "22",
-        house: 1
-    }, 
+        house: 1,
+        IQ: 87,
+        EQ: 65,
+        FQ: 1859,
+        SQ: 984,
+        BQ: 651,
+        AQ: 21
+    },
     {
         name: "Fiona",
         gender: "female",
         birthYear: "1988",
         country: "China",
         identityNo: "23",
-        house: 1
+        house: 1,
+        IQ: 45,
+        EQ: 87,
+        FQ: 62,
+        SQ: 54,
+        BQ: 87,
+        AQ: 21
     },
     {
         name: "Cliff",
@@ -192,7 +330,13 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "American",
         identityNo: "24",
-        house: 1
+        house: 1,
+        IQ: 98,
+        EQ: 98,
+        FQ: 65,
+        SQ: 98,
+        BQ: 65,
+        AQ: 98
     },
     {
         name: "Devin",
@@ -200,7 +344,13 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "25",
-        house: 1
+        house: 1,
+        IQ: 87,
+        EQ: 87,
+        FQ: 87,
+        SQ: 87,
+        BQ: 87,
+        AQ: 87
     },
     {
         name: "Edward",
@@ -208,7 +358,13 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "China",
         identityNo: "26",
-        house: 1
+        house: 1,
+        IQ: 76,
+        EQ: 89,
+        FQ: 456,
+        SQ: 652,
+        BQ: 87,
+        AQ: 51
     },
     {
         name: "Eric",
@@ -216,7 +372,13 @@ export let rawData: Array<any> = [
         birthYear: "1987",
         country: "American",
         identityNo: "27",
-        house: 1
+        house: 1,
+        IQ: 98,
+        EQ: 65,
+        FQ: 87,
+        SQ: 2,
+        BQ: 32,
+        AQ: 68
     },
     {
         name: "Helen",
@@ -224,7 +386,13 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "28",
-        house: 1
+        house: 1,
+        IQ: 64,
+        EQ: 98,
+        FQ: 6352,
+        SQ: 98,
+        BQ: 321,
+        AQ: 854
     },
     {
         name: "Harry",
@@ -232,7 +400,13 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "China",
         identityNo: "29",
-        house: 1
+        house: 1,
+        IQ: 87,
+        EQ: 65,
+        FQ: 87,
+        SQ: 51,
+        BQ: 854,
+        AQ: 87
     },
     {
         name: "Jessie",
@@ -240,7 +414,13 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "30",
-        house: 1
+        house: 1,
+        IQ: 65,
+        EQ: 98,
+        FQ: 87,
+        SQ: 54,
+        BQ: 21,
+        AQ: 64
     },
     {
         name: "Ivan",
@@ -248,7 +428,13 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "American",
         identityNo: "31",
-        house: 1
+        house: 1,
+        IQ: 97,
+        EQ: 64,
+        FQ: 21,
+        SQ: 874,
+        BQ: 87,
+        AQ: 94
     },
     {
         name: "Mick",
@@ -256,7 +442,13 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "American",
         identityNo: "32",
-        house: 1
+        house: 1,
+        IQ: 97,
+        EQ: 654,
+        FQ: 54,
+        SQ: 987,
+        BQ: 541,
+        AQ: 21
     },
     {
         name: "Norman",
@@ -264,15 +456,27 @@ export let rawData: Array<any> = [
         birthYear: "1986",
         country: "China",
         identityNo: "33",
-        house: 1
+        house: 1,
+        IQ: 65,
+        EQ: 98,
+        FQ: 87,
+        SQ: 54,
+        BQ: 65,
+        AQ: 987
     },
     {
         name: "Nomic",
         gender: "male",
         birthYear: "1986",
         country: "American",
-        identityNo: "34",
-        house: 1
+        identityNo: "",
+        house: 1,
+        IQ: 64,
+        EQ: 87,
+        FQ: 514,
+        SQ: 21,
+        BQ: 54,
+        AQ: 87
     },
     {
         name: "Rod",
@@ -280,7 +484,13 @@ export let rawData: Array<any> = [
         birthYear: "1983",
         country: "China",
         identityNo: "35",
-        house: 1
+        house: 1,
+        IQ: 65,
+        EQ: 98,
+        FQ: 87,
+        SQ: 54,
+        BQ: 6,
+        AQ: 321
     },
     {
         name: "Betty",
@@ -288,7 +498,13 @@ export let rawData: Array<any> = [
         birthYear: "1985",
         country: "China",
         identityNo: "36",
-        house: 1
+        house: 1,
+        IQ: 65,
+        EQ: 98,
+        FQ: 87,
+        SQ: 54,
+        BQ: 651,
+        AQ: 98
     },
     {
         name: "Celia",
@@ -296,7 +512,13 @@ export let rawData: Array<any> = [
         birthYear: "1988",
         country: "American",
         identityNo: "37",
-        house: 1
+        house: 1,
+        IQ: 65,
+        EQ: 98,
+        FQ: 87,
+        SQ: 54,
+        BQ: 98,
+        AQ: 651
     },
     {
         name: "Hilary",
@@ -304,7 +526,13 @@ export let rawData: Array<any> = [
         birthYear: "1984",
         country: "China",
         identityNo: "38",
-        house: 1
+        house: 1,
+        IQ: 654,
+        EQ: 987,
+        FQ: 541,
+        SQ: 21,
+        BQ: 54,
+        AQ: 87
     },
 ];
 export let metaData: Array<any> = [
@@ -323,7 +551,7 @@ export let metaData: Array<any> = [
     {
         name: "country",
         dimension: Dimension.StaticProperty
-    }, 
+    },
     {
         name: "house",
         dimension: Dimension.Value
