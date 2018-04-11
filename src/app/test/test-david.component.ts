@@ -49,7 +49,7 @@ export class TestDavidComponent {
 							// multiLine/multiBar bar
 							this.buildNestedPieCharts(node, e.reduceSeq);
 						}
-						else if (t === 4 || t === 5) {
+						else if (t === 8) {
 							this.buildRadarCharts(node, e.reduceSeq);
 						}
 					});
