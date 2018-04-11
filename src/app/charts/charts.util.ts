@@ -16,6 +16,8 @@ export class ChartsUtil {
 		});
 
         return {
+			tooltip : barTooltip,
+            toolbox: barToolBox,
             xAxis: {
                 type: 'value',
                 name: pivotValues[0]
@@ -45,7 +47,9 @@ export class ChartsUtil {
         });
         
         return {
-			tooltip : barTooltip,
+            tooltip : barTooltip,
+            toolbox: barToolBox,
+            
             backgroundColor: '#fff',
             visualMap: {
                 show: false,
@@ -56,7 +60,6 @@ export class ChartsUtil {
                     color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
                 }
             },
-			toolbox: barToolBox,
             
             legend: {
                 orient: 'vertical',
@@ -502,6 +505,8 @@ export class ChartsUtil {
             title: {
                 // text: 'Radar Chart'
             },
+            toolbox: barToolBox,
+            
             tooltip: {},
             legend: {
                 data: legendData,

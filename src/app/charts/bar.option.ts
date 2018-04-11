@@ -38,7 +38,7 @@ export const barToolBox: any = {
 		dataView : {show: false, readOnly: false},
 		magicType : {show: false, type: ['line', 'bar']},
 		restore : {show: false},
-		saveAsImage : {show: true}
+		saveAsImage : {show: false}
 	}
 };
 export const fakeBarData: {name: string, data: number[]}[] = [
