@@ -17,7 +17,7 @@ export class ChartsUtil {
     // 3d line (v,v,t)
     public static convertTo3DLineOption(_data: number[][]): any {
         return {
-            tooltip: {},
+			tooltip : barTooltip,
             backgroundColor: '#fff',
             visualMap: {
                 show: false,
@@ -27,6 +27,12 @@ export class ChartsUtil {
                 inRange: {
                     color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
                 }
+            },
+			toolbox: barToolBox,
+            
+            legend: {
+                orient: 'vertical',
+                left: 'right',
             },
             xAxis3D: {
                 type: 'value'
@@ -54,17 +60,24 @@ export class ChartsUtil {
     // 3d bar (v,v,v)
     public static convertTo3DBarOption(_data: number[][]): any {
         return {
-            tooltip: {},
+			tooltip : barTooltip,
+            
             visualMap: {
                 max: 20,
                 inRange: {
                     color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
                 }
             },
+			toolbox: barToolBox,
+            
             xAxis3D: {
                 type: 'value'
                 // data: hours,
                 // name: 'abc'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'right',
             },
             yAxis3D: {
                 type: 'value'
@@ -168,125 +181,7 @@ export class ChartsUtil {
 	};
 
 
-    public static convertToLineOption(): any {
-        return {
-            toolbox: {
-                show : true,
-                feature : {
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            xAxis: {
-                type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [{
-                data: [820, 932, 901, 934, 1290, 1330, 1320],
-                type: 'line'
-            }]
-        };
-    }
-
-    public static convertToMultiLineOption(): any {
-        var colors = ['#5793f3', '#d14a61', '#675bba'];
-        return {
-            toolbox: {
-                show : true,
-                feature : {
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-
-            color: colors,
-        
-            tooltip: {
-                trigger: 'none',
-                axisPointer: {
-                    type: 'cross'
-                }
-            },
-            legend: {
-                data:['2015 降水量', '2016 降水量']
-            },
-            grid: {
-                top: 70,
-                bottom: 50
-            },
-            xAxis: [
-                {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    axisLine: {
-                        onZero: false,
-                        lineStyle: {
-                            color: colors[1]
-                        }
-                    },
-                    axisPointer: {
-                        label: {
-                            formatter: function (params) {
-                                return '降水量  ' + params.value
-                                    + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-                            }
-                        }
-                    },
-                    data: ["2016-1", "2016-2", "2016-3", "2016-4", "2016-5", "2016-6", "2016-7", "2016-8", "2016-9", "2016-10", "2016-11", "2016-12"]
-                },
-                {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    axisLine: {
-                        onZero: false,
-                        lineStyle: {
-                            color: colors[0]
-                        }
-                    },
-                    axisPointer: {
-                        label: {
-                            formatter: function (params) {
-                                return '降水量  ' + params.value
-                                    + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-                            }
-                        }
-                    },
-                    data: ["2015-1", "2015-2", "2015-3", "2015-4", "2015-5", "2015-6", "2015-7", "2015-8", "2015-9", "2015-10", "2015-11", "2015-12"]
-                }
-            ],
-            yAxis: [
-                {
-                    type: 'value'
-                }
-            ],
-            series: [
-                {
-                    name:'2015 降水量',
-                    type:'line',
-                    xAxisIndex: 1,
-                    smooth: true,
-                    data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-                },
-                {
-                    name:'2016 降水量',
-                    type:'line',
-                    smooth: true,
-                    data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
-                }]
-            };
-	}
-	public static convertToMultiBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, dimLabels: any, type: string): void {
+	public static convertToMultiBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, dimLabels: any, type: string): any {
 		if (reduceSeq.length > 2) {
 			console.warn('not support');
 			return;
@@ -310,7 +205,7 @@ export class ChartsUtil {
 
 		return ChartsUtil.convertToBarOption(type, title, barData, xAxisLabels, subBarLabels);
 	}
-	public static convertToSimpleBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, type: string): void {
+	public static convertToSimpleBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, type: string): any {
 		let xAxisLabels: string[] = chartNode.children.map((e: ChartNode) => e.name);
 		let data: any[] = chartNode.children.map((e: ChartNode) => e.value);
 		let title: string;
@@ -338,6 +233,8 @@ export class ChartsUtil {
 			},
 			tooltip : barTooltip,
 			legend: {
+                orient: 'vertical',
+                left: 'right',
 				data: _subBarlabels == null ? [] : _subBarlabels
 			},
 			toolbox: barToolBox,
@@ -393,7 +290,9 @@ export class ChartsUtil {
 				text: reduceSeqData[0].name,
 				subtext: '',
 				x:'center'
-			},
+            },
+			toolbox: barToolBox,
+            
             tooltip : {
                 trigger: "item",
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -446,6 +345,8 @@ export class ChartsUtil {
                 trigger: 'item',
                 formatter: "{a} <br/>{b}: {c} ({d}%)"
             },
+			toolbox: barToolBox,
+            
             legend: {
                 orient: 'vertical',
                 x: 'right',
@@ -550,7 +451,9 @@ export class ChartsUtil {
             },
             tooltip: {},
             legend: {
-                data: legendData
+                data: legendData,
+                orient: 'vertical',
+                left: 'right',
             },
             radar: {
                 // shape: 'circle',

@@ -603,10 +603,11 @@ export let reduceSeq: Array<any> = [
 ];
 
 export let pivotValues: Array<string> = [
-    "IQ",
-    "EQ",
-    "FQ",
-    "SQ",
-    "BQ",
-    "AQ"
+    // "IQ",
+    // "EQ",
+    // "FQ",
+    // "SQ",
+    // "BQ",
+    // "AQ"
+    "house"
 ]

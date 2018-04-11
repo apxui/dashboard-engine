@@ -35,9 +35,9 @@ export const barMarkLine: any = {
 export const barToolBox: any = {
 	show : true,
 	feature : {
-		dataView : {show: true, readOnly: false},
-		magicType : {show: true, type: ['line', 'bar']},
-		restore : {show: true},
+		dataView : {show: false, readOnly: false},
+		magicType : {show: false, type: ['line', 'bar']},
+		restore : {show: false},
 		saveAsImage : {show: true}
 	}
 };
