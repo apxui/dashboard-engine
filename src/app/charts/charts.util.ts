@@ -6,7 +6,7 @@ export class ChartsUtil {
     public static convertToScatterOption(chartNode: ChartNode, pivotValues: Array<string>): any {
 
         let data: number[][] = [];
-        chartNode.children.forEach((e: any) => {
+        chartNode.data.forEach((e: any) => {
             let a: Array<any> = [];
             pivotValues.forEach((p: string) => {
                 a.push(e[p]);
@@ -29,7 +29,7 @@ export class ChartsUtil {
     public static convertTo3DLineOption(chartNode: ChartNode, pivotValues: Array<string>): any {
 
         let data: number[][] = [];
-        chartNode.children.forEach((e: any) => {
+        chartNode.data.forEach((e: any) => {
             let a: Array<any> = [];
             pivotValues.forEach((p: string) => {
                 a.push(e[p]);
@@ -82,7 +82,7 @@ export class ChartsUtil {
     // 3d bar (v,v,v)
     public static convertTo3DBarOption(chartNode: ChartNode, pivotValues: Array<string>): any {
         let data: number[][] = [];
-        chartNode.children.forEach((e: any) => {
+        chartNode.data.forEach((e: any) => {
             let a: Array<any> = [];
             pivotValues.forEach((p: string) => {
                 a.push(e[p]);
@@ -90,6 +90,10 @@ export class ChartsUtil {
 
             data.push(a);
         });
+        console.log(chartNode);
+        
+        console.log(data);
+        
 
         return {
 			tooltip : barTooltip,
@@ -228,12 +232,12 @@ export class ChartsUtil {
 			chartNode.children.forEach((node: ChartNode) => { // first dimension
 				let N: ChartNode = node.children.find((N: ChartNode) => N.name === sublabel);
 				subBarData.push(N ? N.value : 0);
-			})
+			});
 			barData.push({
 				name: sublabel,
 				data: subBarData
 			});
-		})
+		});
 
 		return ChartsUtil.convertToBarOption(type, title, barData, xAxisLabels, subBarLabels);
     }
@@ -248,12 +252,12 @@ export class ChartsUtil {
 			let subBarData: number[] = [];
 			chartNode.children.forEach((node: ChartNode) => { // first dimension
 				subBarData.push(node[sublabel]);
-			})
+			});
 			barData.push({
 				name: sublabel,
 				data: subBarData
 			});
-		})
+		});
 
 		return ChartsUtil.convertToBarOption('bar', title, barData, xAxisLabels, subBarLabels);
     }
@@ -273,7 +277,7 @@ export class ChartsUtil {
 			barData = [{
 				name: chartNode.name,
 				data: [chartNode.value]
-			}]
+			}];
 		}
 		return ChartsUtil.convertToBarOption(type, title, barData, xAxisLabels);
 	}
@@ -309,7 +313,7 @@ export class ChartsUtil {
 					data: s.data,
 					markPoint : barMarkPoint,
 					markLine : barMarkLine
-				}
+				};
 			})
 		};
 	}

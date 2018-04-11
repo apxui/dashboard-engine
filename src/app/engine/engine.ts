@@ -46,6 +46,12 @@ export class DashboardEngine {
                 if (ct.type.indexOf(ChartType.Radio) >= 0) {
                     result.push(ChartsUtil.convertChartNodeToRadarChartNode(chartNode, pivotValues));
                 }
+                if (ct.type.indexOf(ChartType.Scatter) >= 0) {
+                    result.push(ChartsUtil.convertToScatterOption(chartNode, pivotValues));
+                }
+                if (ct.type.indexOf(ChartType.ThreeDim) >= 0) {
+                    result.push(ChartsUtil.convertTo3DBarOption(chartNode, pivotValues));
+                }
             });
             return result;
         } else {
