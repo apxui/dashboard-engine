@@ -21,18 +21,22 @@ import { WizardService } from './wizard.service';
                     <option *ngFor="let e of supportedEntities" [value]="e">{{e}}</option>
                 </select>
             </div>
-            <div class="form-group row mb-4" *ngIf="allVFields.length > 0">
+            <div class="form-group mb-4" *ngIf="allVFields.length > 0">
                 <h6>Which values do you care the most?</h6>
-                <div class="form-check col-sm-6" *ngFor="let vf of allVFields">
-                    <input class="form-check-input" type="checkbox" (click)="onSelectVField(vf.name)">
-                    <label class="form-check-label">{{vf.name}}</label>
-                </div>
+	            <div class="row pl-2">
+                    <div class="form-check col-sm-6" *ngFor="let vf of allVFields">
+                        <input class="form-check-input" type="checkbox" (click)="onSelectVField(vf.name)">
+                        <label class="form-check-label">{{vf.name}}</label>
+                    </div>
+	            </div>
             </div>
-            <div class="form-group row mb-4" *ngIf="allOtherFields.length > 0">
+            <div class="form-group mb-4" *ngIf="allOtherFields.length > 0">
                 <h6>How would you put these fields in order?</h6>
-                <div class="form-check col-sm-6" *ngFor="let vf of allOtherFields">
-                    <input class="form-check-input" type="checkbox" (click)="onSelectOtherFields(vf.name)">
-                    <label class="form-check-label">{{vf.name}}</label>
+                <div class="row pl-2">
+	                <div class="form-check col-sm-6" *ngFor="let vf of allOtherFields">
+	                    <input class="form-check-input" type="checkbox" (click)="onSelectOtherFields(vf.name)">
+	                    <label class="form-check-label">{{vf.name}}</label>
+	                </div>
                 </div>
             </div>
         </div>
@@ -69,6 +73,8 @@ export class WizardComponent {
 
 	onSelectEntity(entity: string): void {
 		this.selectedEntity = entity;
+		this.selectedVFields = [];
+		this.selectedOtherFields = [];
 		this.loadData();
 	}
 
@@ -97,6 +103,11 @@ export class WizardComponent {
 	}
 
 	loadData(): void {
+		this.allVFields = [];
+		this.allTFields = [];
+		this.allPFields = [];
+		this.allOtherFields = [];
+
 		let meta: any[];
 		let data: any[];
 		switch (this.selectedEntity) {
@@ -117,10 +128,6 @@ export class WizardComponent {
 			this.allVFields = meta.filter(md => md.dimension === Dimension.Value);
 			this.allTFields = meta.filter(md => md.dimension === Dimension.Time);
 			this.allPFields = meta.filter(md => md.dimension === Dimension.StaticProperty);
-		} else {
-			this.allVFields = [];
-			this.allTFields = [];
-			this.allPFields = [];
 		}
 
 		this.meta = meta;
