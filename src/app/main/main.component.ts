@@ -36,8 +36,8 @@ import 'rxjs/add/operator/take';
                         </div>
 	                </div>
                     <div class="row pt-3">
-                        <div [ngClass]="activeColClass()" *ngFor="let opt of activeChartGroup?.chartOptions">
-                            <div echarts [options]="opt"></div>
+                        <div class="p-2 col-md-12" [ngClass]="activeColClass()" *ngFor="let opt of activeChartGroup?.chartOptions">
+                            <div style="border: 1px solid #dee2e6; border-radius: 5px; height: 400px;" echarts [options]="opt"></div>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,10 @@ export class MainComponent {
 		id: 'empty',
 		name: '(empty)',
 		entity: undefined,
-		treeOptions: null,
+		treeOptions: {
+			tree: null,
+			treeOptions: null
+		},
 		chartOptions: []
 	};
 
@@ -81,16 +84,15 @@ export class MainComponent {
 		chartTypes.forEach((ct: TypeResult) => {
 			dimLabels.push(ct.reduceSeq.map((dim: Property) => this.activeChartGroup.treeOptions.tree.getAllPropertiesByDim(dim.name)));
 		});
-		DashboardEngine.createChartOption(chartTypes, node, dimLabels);
+		const charts: any[] = DashboardEngine.createChartOption(chartTypes, node, dimLabels);
+		this.activeChartGroup.chartOptions = charts;
 	}
 
 	activeColClass(): any {
 		const chartCount: number = this.activeChartGroup.chartOptions.length;
 		return {
-			'col-md-12': true,
 			'col-lg-12': chartCount === 1,
-			'col-lg-6': chartCount === 2,
-			'col-lg-4': chartCount > 2
+			'col-lg-6': chartCount > 1
 		};
 	}
 
