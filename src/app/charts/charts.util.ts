@@ -169,8 +169,53 @@ export class ChartsUtil {
                     data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
                 }]
             };
-    }
-    public static convertToBarOption(_title: string, _series: {name: string, data: number[]}[], _xAxisLabel: string[], _subBarlabels?: string[]): any {
+	}
+	public static convertToMultiBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, dimLabels: any, type: string): void {
+		if (reduceSeq.length > 2) {
+			console.warn('not support');
+			return;
+		}
+		let labels: any = dimLabels;
+		let title: string = reduceSeq.map((r: Property) => r.name).join(' ');
+		let xAxisLabels: string[] = labels[0]; // x axis label, should be the first dimension
+		let subBarLabels: string[] = labels[1];
+		let barData: any = [];
+		subBarLabels.forEach((sublabel: string) => {
+			let subBarData: number[] = [];
+			chartNode.children.forEach((node: ChartNode) => { // first dimension
+				let N: ChartNode = node.children.find((N: ChartNode) => N.name === sublabel);
+				subBarData.push(N ? N.value : 0);
+			})
+			barData.push({
+				name: sublabel,
+				data: subBarData
+			});
+		})
+
+		return ChartsUtil.convertToBarOption(type, title, barData, xAxisLabels, subBarLabels);
+	}
+	public static convertToSimpleBarChartOption(reduceSeq: Array<Property>, chartNode: ChartNode, type: string): void {
+		let xAxisLabels: string[] = chartNode.children.map((e: ChartNode) => e.name);
+		let data: any[] = chartNode.children.map((e: ChartNode) => e.value);
+		let title: string;
+		let barData: any;
+		if (reduceSeq && reduceSeq.length > 0) {
+			title = reduceSeq[0].name;
+			barData = [{
+				name: reduceSeq[0].name,
+				data: data
+			}];
+		} else {
+			title = chartNode.name;
+			barData = [{
+				name: chartNode.name,
+				data: [chartNode.value]
+			}]
+		}
+		return ChartsUtil.convertToBarOption(type, title, barData, xAxisLabels);
+	}
+
+    private static convertToBarOption(_type: string, _title: string, _series: {name: string, data: number[]}[], _xAxisLabel: string[], _subBarlabels?: string[]): any {
 		return  {
 			title : {
 				text: _title
@@ -195,7 +240,7 @@ export class ChartsUtil {
 			series: _series.map((s: {name: string, data: number[]}) => {
 				return {
 					name: s.name,
-					type: 'bar',
+					type: _type,
 					data: s.data,
 					markPoint : barMarkPoint,
 					markLine : barMarkLine

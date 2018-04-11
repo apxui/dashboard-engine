@@ -50,95 +50,42 @@ export class TestGraceComponent {
 				// to-do
 				if (ct.type.indexOf(ChartType.Pie) >= 0) {
 					let pieOption: any = ChartsUtil.convertChartNodeToPieNode(chartNode, ct.reduceSeq);
-					this.chartList.push(
-						{
-							chartOption: {
-								option: pieOption
-							},
-							chartType: 'pie'
-						});
+					this._drawChart(pieOption, ChartType.Pie);
 				}
 				if (ct.type.indexOf(ChartType.NestedPie) >= 0) {
 					let nestedPieOption: any = ChartsUtil.convertChartNodeToNestedPieNode(chartNode, ct.reduceSeq);
-					this.chartList.push(
-						{
-							chartOption: {
-								option: nestedPieOption
-							},
-							chartType: 'nestedPie'
-						});
+					this._drawChart(nestedPieOption, ChartType.NestedPie);
 				}
 				if (ct.type.indexOf(ChartType.Bar) >= 0) {
-					this._createBarChart(ct.reduceSeq, chartNode);
+					this._drawChart(ChartsUtil.convertToSimpleBarChartOption(ct.reduceSeq, chartNode, 'bar'), ChartType.Bar);
 				}
 				if (ct.type.indexOf(ChartType.MultiBar) >= 0) {
-					console.log('multibar');
-					this._createMultiBarChart(ct.reduceSeq, chartNode, dimLabels[chartTypes.indexOf(ct)]);
+					this._drawChart(ChartsUtil.convertToMultiBarChartOption(ct.reduceSeq, chartNode, dimLabels[chartTypes.indexOf(ct)], 'bar'), ChartType.MultiBar);
+				}
+				if (ct.type.indexOf(ChartType.Line) >= 0) {
+					this._drawChart(ChartsUtil.convertToSimpleBarChartOption(ct.reduceSeq, chartNode, 'line'), ChartType.Line);
+				}
+				if (ct.type.indexOf(ChartType.MultiLine) >= 0) {
+					this._drawChart(ChartsUtil.convertToMultiBarChartOption(ct.reduceSeq, chartNode, dimLabels[chartTypes.indexOf(ct)], 'line'), ChartType.MultiLine);
 				}
 			})
 		} else {
-			this._createBarChart([], chartNode);
+			this._drawChart(ChartsUtil.convertToSimpleBarChartOption([], chartNode, 'bar'), ChartType.Bar);
 		}
 	}
-	_createMultiBarChart(reduceSeq: Array<Property>, chartNode: ChartNode, dimLabels: any): void {
-		if (reduceSeq.length > 2) {
-			console.warn('not support');
-			return;
-		}
-		let labels: any = dimLabels;
-		let title: string = reduceSeq.map((r: Property) => r.name).join(' ');
-		let xAxisLabels: string[] = labels[0]; // x axis label, should be the first dimension
-		let subBarLabels: string[] = labels[1];
-		let barData: any = [];
-		subBarLabels.forEach((sublabel: string) => {
-			let subBarData: number[] = [];
-			chartNode.children.forEach((node: ChartNode) => { // first dimension
-				let N: ChartNode = node.children.find((N: ChartNode) => N.name === sublabel);
-				subBarData.push(N ? N.value : 0);
-			})
-			barData.push({
-				name: sublabel,
-				data: subBarData
-			});
-		})
 
+	_drawChart(option: any, type: ChartType): void {
 		this.chartList.push(
 			{
 				chartOption: {
-					option: ChartsUtil.convertToBarOption(title, barData, xAxisLabels, subBarLabels)
+					option: option
 				},
-				chartType: 'bar'
-			});
-	}
-	_createBarChart(reduceSeq: Array<Property>, chartNode: ChartNode): void {
-		let xAxisLabels: string[] = chartNode.children.map((e: ChartNode) => e.name);
-		let data: any[] = chartNode.children.map((e: ChartNode) => e.value);
-		let title: string;
-		let barData: any;
-		if (reduceSeq && reduceSeq.length > 0) {
-			title = reduceSeq[0].name;
-			barData = [{
-				name: reduceSeq[0].name,
-				data: data
-			}];
-		} else {
-			title = chartNode.name;
-			barData = [{
-				name: chartNode.name,
-				data: [chartNode.value]
-			}]
-		}
-		this.chartList.push(
-			{
-				chartOption: {
-					option: ChartsUtil.convertToBarOption(title, barData, xAxisLabels)
-				},
-				chartType: 'bar'
+				chartType: type
 			});
 	}
 }
 
 export class ChartObject {
-	chartType: string;
+	chartType: ChartType;
 	chartOption: any;
 }
