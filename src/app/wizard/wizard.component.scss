@@ -1,0 +1,17 @@
+:host {
+	position: relative;
+	height: 100%;
+	display: block;
+	overflow: hidden;
+}
+
+.action-buttons {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+
+.action-button {
+	width: 100%;
+}

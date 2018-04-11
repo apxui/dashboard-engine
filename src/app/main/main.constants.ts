@@ -6,5 +6,5 @@ export class SupportedEntities {
 	static readonly Transactions = 'Transactions';
 	static readonly Securities = 'Securities';
 
-	static readonly ALL = ['Portfolios', 'Activities', 'Contacts', 'Holdings', 'Transactions', 'Securities'];
+	static readonly ALL = ['Humans', 'Portfolios'];
 }
