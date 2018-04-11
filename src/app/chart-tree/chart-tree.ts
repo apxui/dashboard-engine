@@ -36,7 +36,6 @@ export class ChartTree {
 		this._reduceSeq = reduceseq;
 		this._pivotValues = pivotValues;
 		this.buildTree();
-		console.log(this._rootNode);
 		return this._rootNode;
 	}
 
