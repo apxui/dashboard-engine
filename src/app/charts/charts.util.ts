@@ -403,17 +403,30 @@ export class ChartsUtil {
         let legendData: Array<any> = [];
         let seriesData: Array<any> = [];
         let indicator: Array<any> = [];
+        let maxData: Array<number> = [];
+        let maxValue: number = 0;
+
 		node.children.forEach((e: any) => {
             legendData.push(e.name);
             
             let d: Array<any> = [];
             e.children.forEach((c: any) => {
-                indicator.push({name: c.name, max: 500});
-                d.push(c.value);
+                maxData.push(Number(c.value));
+                d.push(Number(c.value));
             });
 
 			seriesData.push({value: d, name: e.name});
-		});
+        });
+        
+        maxData.sort();    
+        let max: number = maxData[maxData.length] + 100; 
+
+        node.children.forEach((e: any) => {
+            e.children.forEach((c: any) => {
+                indicator.push({name: c.name, max: max});
+            });
+        });
+
         
         let option: any = {
             title: {
