@@ -7,7 +7,10 @@ export class DashboardEngine {
         let mainTree: ChartTree = new ChartTree();
         let mainTreeData: any = mainTree.buildAndGetRootnode(rawdata, metadata, reduceseq, pivotValues);
         let mainTreeOption: any = ChartsUtil.convertToTreeOption(mainTreeData);
-        return mainTreeOption;
+        return {
+            tree: mainTree,
+            treeOptions: mainTreeOption
+        };
     }
     public static createChartOption(chartTypes: TypeResult[], chartNode: ChartNode, dimLabels: any): any[] {
         let result: any[] = [];

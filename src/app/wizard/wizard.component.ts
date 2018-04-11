@@ -136,7 +136,7 @@ export class WizardComponent {
 	}
 
 	onRun(): void {
-		const tree: any = this.runEngine();
+		const tree = this.runEngine();
 		this.run.emit({
 			entity: this.selectedEntity,
 			treeOptions: tree,
@@ -149,7 +149,7 @@ export class WizardComponent {
 		this.runNew.emit({
 			entity: this.selectedEntity,
 			treeOptions: tree,
-			chartOptions: this.options()
+			chartOptions: []
 		});
 	}
 

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ChartNode, Property, TypeResult } from '../chart-tree/entity';
+import { DashboardEngine } from '../engine/engine';
 import { StorageService } from '../storage/storage.service';
 import { WizardService } from '../wizard/wizard.service';
 import { IChartGroup } from './main.types';
@@ -28,8 +30,10 @@ import 'rxjs/add/operator/take';
                 <div class="flex-grow-1 container-fluid pt-3"
                      style="overflow-y: auto; overflow-x: hidden;"
                 >
-	                <div class="row pb-3" style="height: 300px; border-bottom: #dee2e6 1px solid;">
-                        <div echarts [options]="activeChartGroup?.treeOptions"></div>
+	                <div class="row pb-3" style="height: 300px; border-bottom: #dee2e6 1px solid; overflow-y: auto;">
+                        <div class="col-12">
+                            <div echarts [options]="activeChartGroup.treeOptions.treeOptions" (chartClick)="onTreeClick($event.data)"></div>
+                        </div>
 	                </div>
                     <div class="row pt-3">
                         <div [ngClass]="activeColClass()" *ngFor="let opt of activeChartGroup?.chartOptions">
@@ -70,6 +74,16 @@ export class MainComponent {
 		this.resetChartGroups();
 	}
 
+	onTreeClick(data: any): void {
+		let node: ChartNode = this.activeChartGroup.treeOptions.tree.getNode(data.uid);
+		let chartTypes: TypeResult[] = this.activeChartGroup.treeOptions.tree.getChartTypeForNode(node);
+		let dimLabels: any = [];
+		chartTypes.forEach((ct: TypeResult) => {
+			dimLabels.push(ct.reduceSeq.map((dim: Property) => this.activeChartGroup.treeOptions.tree.getAllPropertiesByDim(dim.name)));
+		});
+		DashboardEngine.createChartOption(chartTypes, node, dimLabels);
+	}
+
 	activeColClass(): any {
 		const chartCount: number = this.activeChartGroup.chartOptions.length;
 		return {
@@ -105,6 +119,7 @@ export class MainComponent {
 	}
 
 	private createChartGroup(entity: string, treeOptions: any, chartOptions: any[], inNewTab: boolean = true): void {
+		console.log(treeOptions);
 		const groups: IChartGroup[] = [...this.chartGroups];
 		const newId: string = `${this.uid ++}_${entity}`;
 		const newGroup: IChartGroup = {
