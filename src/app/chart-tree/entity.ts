@@ -10,7 +10,10 @@ export enum ChartType {
 	Bar,
 	MultiLine,
 	MultiBar,
-	NestedPie
+	NestedPie,
+	Scatter,
+	Radio,
+	ThreeDimLine
 }
 
 export class Property {
@@ -35,7 +38,6 @@ export class ChartNode {
 	name: string;
 	layer: number;
 	data: Array<any>;
-	value: number;
 	children: Array<ChartNode>;
 	parent: ChartNode;
 }

@@ -601,3 +601,12 @@ export let reduceSeq: Array<any> = [
         dimension: Dimension.StaticProperty
     }
 ];
+
+export let pivotValues: Array<string> = [
+    "IQ",
+    "EQ",
+    "FQ",
+    "SQ",
+    "BQ",
+    "AQ"
+]
