@@ -519,7 +519,7 @@ export class ChartsUtil {
                 indicator: indicator
             },
             series: [{
-                name: 'Budget vs spending',
+                name: 'Data',
                 type: 'radar',
                 // areaStyle: {normal: {}},
                 data: seriesData
