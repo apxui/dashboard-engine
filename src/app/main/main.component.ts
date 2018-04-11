@@ -1,27 +1,19 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Component } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
 import { WizardService } from '../wizard/wizard.service';
-import { SupportedEntities } from './main.constants';
 import { IChartGroup } from './main.types';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/take';
 
 @Component({
 	selector: 'app-main',
 	styleUrls: ['./main.component.scss'],
 	template: `
 		<div class="d-flex flex-row" style="height: 100%;">
-            <div style="overflow-y: auto; min-width: 200px; flex: 0 1 auto;">
-                <div class="sticky-top px-3 pt-3 pb-1" style="background-color: white;">
-                    <h6>Begin with a data type:</h6>
-                </div>
-	            <div class="px-3 pt-1 pb-3">
-                    <div class="mb-2" *ngFor="let e of supportedEntities">
-                        <button class="entity-button btn btn-outline-secondary" (click)="onChooseEntity(e)">{{e}}</button>
-                    </div>
-	            </div>
+            <div style="min-width: 300px; flex: 0 1 auto; border-right: 1px solid #dee2e6;">
+                <app-wizard (run)="onRun($event)" (runNew)="onRunNew($event)" (closeAll)="onCloseAll()"></app-wizard>
             </div>
-			<div class="flex-grow-1 d-flex flex-column pr-3 py-3">
+			<div class="flex-grow-1 d-flex flex-column pl-3 pr-3 py-3">
                 <ul class="nav nav-tabs sticky-top" style="min-height: 42px; flex: 0 1 auto;">
                     <li class="nav-item" *ngFor="let cg of chartGroups; let i = index">
                         <div class="nav-link" [class.active]="cg.id === activeChartGroup?.id" style="cursor: pointer;" (click)="onSelectChartGroup(cg)">
@@ -36,7 +28,10 @@ import 'rxjs/add/operator/filter';
                 <div class="flex-grow-1 container-fluid pt-3"
                      style="overflow-y: auto; overflow-x: hidden;"
                 >
-                    <div class="row">
+	                <div class="row pb-3" style="height: 300px; border-bottom: #dee2e6 1px solid;">
+                        <div echarts [options]="activeChartGroup?.treeOptions"></div>
+	                </div>
+                    <div class="row pt-3">
                         <div [ngClass]="activeColClass()" *ngFor="let opt of activeChartGroup?.chartOptions">
                             <div echarts [options]="opt"></div>
                         </div>
@@ -46,29 +41,32 @@ import 'rxjs/add/operator/filter';
 		</div>
 	`
 })
-export class MainComponent implements OnDestroy {
+export class MainComponent {
 	readonly EmptyChartGroup: IChartGroup = {
 		id: 'empty',
 		name: '(empty)',
 		entity: undefined,
+		treeOptions: null,
 		chartOptions: []
 	};
 
-	supportedEntities: string[] = SupportedEntities.ALL;
 	chartGroups: IChartGroup[] = [this.EmptyChartGroup];
 	activeChartGroup: IChartGroup = this.EmptyChartGroup;
-
-	private createChartsSubscription: Subscription;
 
 	constructor(private wizard: WizardService, private storage: StorageService) {
 		this.restoreFromStorage();
 	}
 
-	ngOnDestroy(): void {
-		if (this.createChartsSubscription) {
-			this.createChartsSubscription.unsubscribe();
-			this.createChartsSubscription = null;
-		}
+	onRun({entity, treeOptions, chartOptions}): void {
+		this.createChartGroup(entity, treeOptions, chartOptions, false);
+	}
+
+	onRunNew({entity, treeOptions, chartOptions}): void {
+		this.createChartGroup(entity, treeOptions, chartOptions);
+	}
+
+	onCloseAll(): void {
+		this.resetChartGroups();
 	}
 
 	activeColClass(): any {
@@ -79,16 +77,6 @@ export class MainComponent implements OnDestroy {
 			'col-lg-6': chartCount === 2,
 			'col-lg-4': chartCount > 2
 		};
-	}
-
-	onChooseEntity(entity: string): void {
-		if (this.createChartsSubscription) {
-			this.createChartsSubscription.unsubscribe();
-			this.createChartsSubscription = null;
-		}
-		this.createChartsSubscription = this.wizard.createCharts(entity).filter(chartOptions => chartOptions && chartOptions.length > 0).subscribe(chartOptions => {
-			this.createNewChartGroup(entity, chartOptions);
-		});
 	}
 
 	onSelectChartGroup(group: IChartGroup): void {
@@ -113,7 +101,7 @@ export class MainComponent implements OnDestroy {
 		this.storage.clearAll();
 	}
 
-	private createNewChartGroup(entity: string, chartOptions: any[]): void {
+	private createChartGroup(entity: string, treeOptions: any, chartOptions: any[], inNewTab: boolean = true): void {
 		const groups: IChartGroup[] = [...this.chartGroups];
 		if (this.activeChartGroup.id === this.EmptyChartGroup.id) {
 			groups.length = 0;
@@ -122,6 +110,7 @@ export class MainComponent implements OnDestroy {
 			entity: entity,
 			id: `${groups.length}_${entity}`,
 			name: `${groups.length}_${entity}`,
+			treeOptions: treeOptions,
 			chartOptions: [...chartOptions]
 		};
 		groups.push(newGroup);
