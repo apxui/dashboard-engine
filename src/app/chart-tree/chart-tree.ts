@@ -14,29 +14,13 @@ export class ChartTree {
 	private _allNodes: Array<ChartNode> = [];
 	private _dimPropTable: any = {};
 
-	public getChartTypeForNode(node: ChartNode): Array<TypeResult> {
-		let redSeq: Array<Property> = [];
-		let result: Array<any> = [];
-		//from the layer of the node, judget the type for each further layer
-		for (let i = node.layer; i < this._reduceSeq.length; i++) {
-			redSeq.push(this._reduceSeq[i]);
-			let resultForLayer: any = this._typeDecider.decideType(redSeq.slice());//use slice to shallow copy Array: redSeq
-			if (resultForLayer) {
-				result.push(resultForLayer);
-			} else {
-				break;
-			}
-		}
-		return result;
-	}
-
 	public buildAndGetRootnode(rawdata: Array<any>, metadata: Array<any>, reduceseq: Array<Property>, pivotValues: Array<string>): ChartNode {
 		this._rawData = rawdata;
 		this._metaData = metadata;
 		this._reduceSeq = reduceseq;
 		this._pivotValues = pivotValues;
 		this.buildTree();
-		console.log(this._rootNode);
+		console.log(this.getChartTypeForNode(this._rootNode));
 		return this._rootNode;
 	}
 
@@ -47,6 +31,24 @@ export class ChartTree {
 	public getAllPropertiesByDim(dim: string): Array<string> {
 		return this._dimPropTable[dim];
 	}
+
+	public getChartTypeForNode(node: ChartNode): Array<TypeResult> {
+		let redSeq: Array<Property> = [];
+		let result: Array<any> = [];
+		//from the layer of the node, judget the type for each further layer
+
+		for (let i = node.layer -1; i < this._reduceSeq.length; i++) {
+			if (i > node.layer -1) {
+				redSeq.push(this._reduceSeq[i]);
+			}
+			let resultForLayer: any = this._typeDecider.decideType(redSeq.slice(), this._pivotValues);//use slice to shallow copy Array: redSeq
+			if (resultForLayer) {
+				result.push(resultForLayer);
+			}
+		}
+		return result;
+	}
+
 
 	private filterRawData(): void {
 		let newRawData: Array<any> = [];

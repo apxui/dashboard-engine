@@ -13,7 +13,7 @@ export enum ChartType {
 	NestedPie,
 	Scatter,
 	Radio,
-	ThreeDimLine
+	ThreeDim
 }
 
 export class Property {
