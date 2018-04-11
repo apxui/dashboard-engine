@@ -67,6 +67,6 @@ export class TestDavidComponent {
 	}
 
 	buildRadarCharts(node: ChartNode, reduceSeqData: Array<Property>): void {
-		this.pOption = ChartsUtil.convertChartNodeToRadarChartNode(node, reduceSeqData);
+		this.pOption = ChartsUtil.convertChartNodeToRadarChartNode(node, null);
 	}
 }

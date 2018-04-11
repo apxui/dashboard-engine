@@ -3,19 +3,41 @@ import { barTooltip, barToolBox, barMarkPoint, barMarkLine } from "./bar.option"
 
 export class ChartsUtil {
     // 2 values
-    public static convertToScatterOption(_data: number[][]): any {
+    public static convertToScatterOption(chartNode: ChartNode, pivotValues: Array<string>): any {
+
+        let data: number[][] = [];
+        chartNode.children.forEach((e: any) => {
+            let a: Array<any> = [];
+            pivotValues.forEach((p: string) => {
+                a.push(e[p]);
+            });
+
+            data.push(a);
+		});
+
         return {
             xAxis: {},
             yAxis: {},
             series: [{
                 symbolSize: 20,
-                data: _data,
+                data: data,
                 type: 'scatter'
             }]
         };
     }
     // 3d line (v,v,t)
-    public static convertTo3DLineOption(_data: number[][]): any {
+    public static convertTo3DLineOption(chartNode: ChartNode, pivotValues: Array<string>): any {
+
+        let data: number[][] = [];
+        chartNode.children.forEach((e: any) => {
+            let a: Array<any> = [];
+            pivotValues.forEach((p: string) => {
+                a.push(e[p]);
+            });
+
+            data.push(a);
+        });
+        
         return {
 			tooltip : barTooltip,
             backgroundColor: '#fff',
@@ -50,7 +72,7 @@ export class ChartsUtil {
             },
             series: [{
                 type: 'line3D',
-                data: _data,
+                data: data,
                 lineStyle: {
                     width: 4
                 }
@@ -58,7 +80,17 @@ export class ChartsUtil {
         }
     }
     // 3d bar (v,v,v)
-    public static convertTo3DBarOption(_data: number[][]): any {
+    public static convertTo3DBarOption(chartNode: ChartNode, pivotValues: Array<string>): any {
+        let data: number[][] = [];
+        chartNode.children.forEach((e: any) => {
+            let a: Array<any> = [];
+            pivotValues.forEach((p: string) => {
+                a.push(e[p]);
+            });
+
+            data.push(a);
+        });
+
         return {
 			tooltip : barTooltip,
             
@@ -103,7 +135,7 @@ export class ChartsUtil {
             },
             series: [{
                 type: 'bar3D',
-                data: _data.map(function (item) {
+                data: data.map(function (item) {
                     return {
                         value: [item[1], item[0], item[2]],
                     }
