@@ -9,7 +9,7 @@ export class DashboardEngine {
         let mainTreeOption: any = ChartsUtil.convertToTreeOption(mainTreeData);
         return mainTreeOption;
     }
-    public static createChartOption(chartTypes: TypeResult[], chartNode: ChartNode, dimLabels: any): any {
+    public static createChartOption(chartTypes: TypeResult[], chartNode: ChartNode, dimLabels: any): any[] {
         let result: any[] = [];
         if (chartTypes && chartTypes.length > 0) {
             chartTypes.forEach((ct: TypeResult) => {
