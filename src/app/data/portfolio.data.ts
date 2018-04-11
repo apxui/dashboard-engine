@@ -27,7 +27,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -13000,
+        TotalMarketValueInGlobalCurrency: 13000,
         PortfolioStatus: "Open",
         PortfolioCode: "1cashdiv",
         PortfolioType: "Individual",
@@ -49,7 +49,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1778-11-30T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -8775,
+        TotalMarketValueInGlobalCurrency: 8775,
         PortfolioStatus: "Open",
         PortfolioCode: "1expost",
         PortfolioType: "Individual",
@@ -60,7 +60,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -20000,
+        TotalMarketValueInGlobalCurrency: 20000,
         PortfolioStatus: "Open",
         PortfolioCode: "2cashdiv",
         PortfolioType: "Individual",
@@ -104,7 +104,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1778-11-30T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -8775,
+        TotalMarketValueInGlobalCurrency: 8775,
         PortfolioStatus: "Open",
         PortfolioCode: "3expost",
         PortfolioType: "Individual",
@@ -115,7 +115,7 @@ export let rawData: Array<any> = [
     {
         StartDate: null,
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -10100,
+        TotalMarketValueInGlobalCurrency: 10100,
         PortfolioStatus: "Open",
         PortfolioCode: "4expost",
         PortfolioType: "Individual",
@@ -170,7 +170,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -40000,
+        TotalMarketValueInGlobalCurrency: 40000,
         PortfolioStatus: "Prospect",
         PortfolioCode: "acrnaivs",
         PortfolioType: "Individual",
@@ -192,7 +192,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -10000000,
+        TotalMarketValueInGlobalCurrency: 10000000,
         PortfolioStatus: "Prospect",
         PortfolioCode: "allocsuper_model",
         PortfolioType: "Joint",
@@ -214,7 +214,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -40000,
+        TotalMarketValueInGlobalCurrency: 40000,
         PortfolioStatus: "Prospect",
         PortfolioCode: "amrmamrr",
         PortfolioType: "Joint",
@@ -225,7 +225,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -17464,
+        TotalMarketValueInGlobalCurrency: 17464,
         PortfolioStatus: "Prospect",
         PortfolioCode: "amrr",
         PortfolioType: "Joint",
@@ -236,7 +236,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -40000,
+        TotalMarketValueInGlobalCurrency: 40000,
         PortfolioStatus: "Open",
         PortfolioCode: "artsbara",
         PortfolioType: "Joint",
@@ -258,7 +258,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -10243.42,
+        TotalMarketValueInGlobalCurrency: 10243.42,
         PortfolioStatus: "Model",
         PortfolioCode: "auct",
         PortfolioType: "Joint",
@@ -280,7 +280,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -13000,
+        TotalMarketValueInGlobalCurrency: 13000,
         PortfolioStatus: "Model",
         PortfolioCode: "begrbgnm",
         PortfolioType: "Joint",
@@ -291,7 +291,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -40000,
+        TotalMarketValueInGlobalCurrency: 40000,
         PortfolioStatus: "Model",
         PortfolioCode: "btfibval",
         PortfolioType: "Joint",
@@ -379,7 +379,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -268700.5,
+        TotalMarketValueInGlobalCurrency: 268700.5,
         PortfolioStatus: "Model",
         PortfolioCode: "convtips",
         PortfolioType: "Joint",
@@ -423,7 +423,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -13888.25,
+        TotalMarketValueInGlobalCurrency: 13888.25,
         PortfolioStatus: "Model",
         PortfolioCode: "defined",
         PortfolioType: "IRA",
@@ -500,7 +500,7 @@ export let rawData: Array<any> = [
     {
         StartDate: "1704-03-01T00:00:00",
         CloseDate: null,
-        TotalMarketValueInGlobalCurrency: -5000,
+        TotalMarketValueInGlobalCurrency: 5000,
         PortfolioStatus: "Open",
         PortfolioCode: "forward",
         PortfolioType: "Trust",

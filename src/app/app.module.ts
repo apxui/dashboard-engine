@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { MainModule } from './main/main.module';
+import { StorageModule } from './storage/storage.module';
 import { TestGraceComponent } from './test/test-grace.component';
 import { TestLucasComponent } from './test/test-lucas.component';
 import { TestModule } from './test/test.module';
@@ -23,6 +24,7 @@ const routing = [
 	imports: [
 		BrowserModule,
 		RouterModule.forRoot(routing),
+		StorageModule,
 		TestModule,
 		MainModule
 	],
