@@ -12,6 +12,7 @@ export class ChartTree {
 	private _typeDecider: ChartTypeDecider = new ChartTypeDecider();
 	private _id: number = 0;
 	private _allNodes: Array<ChartNode> = [];
+	private _dimPropTable: any = {};
 
 	public getChartTypeForNode(node: ChartNode): Array<TypeResult> {
 		let redSeq: Array<Property> = [];
@@ -34,12 +35,15 @@ export class ChartTree {
 		this._metaData = metadata;
 		this._reduceSeq = reduceseq;
 		this.buildTree();
-		console.log(this._rootNode);
 		return this._rootNode;
 	}
 
 	public getNode(id: number): ChartNode {
 		return this._allNodes[id];
+	}
+
+	public getAllPropertiesByDim(dim: string): Array<string> {
+		return this._dimPropTable[dim];
 	}
 
 	private filterRawData(): void {
@@ -68,6 +72,21 @@ export class ChartTree {
 
 		//summarize the value of each node
 		this.buildlNodeValue();
+
+		//build dimension-property table
+		this.buildDimPropTable();
+	}
+
+	private buildDimPropTable(): void {
+		this._reduceSeq.forEach((prop: Property) => {
+			let groupResult: any = this._rawData.reduce((groups: any, item: any) => {
+				const val: any = item[prop.name];
+				groups[val] = groups[val] || [];
+				groups[val].push(item);
+				return groups;
+			}, {});
+			this._dimPropTable[prop.name] = Object.getOwnPropertyNames(groupResult);
+		});
 	}
 
 	private buildlNodeValue(): void {

@@ -19,7 +19,7 @@ export class Property {
 
 export class TypeResult {
 	reduceSeq: Array<Property>;
-	type: Array<ChartType>
+	type: Array<ChartType>;
 }
 
 export class ChartNode {

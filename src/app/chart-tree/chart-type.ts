@@ -1,7 +1,7 @@
 import { ChartType, Property, TypeResult } from './entity';
 
 export class ChartTypeDecider {
-    private _reduceSeq: Array<Property>
+    private _reduceSeq: Array<Property>;
 
     private _dimensionChartTable: any = {
         '2': [ChartType.Line],
