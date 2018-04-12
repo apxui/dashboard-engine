@@ -347,11 +347,6 @@ export class ChartsUtil {
 		});
 
 		let option: any = {
-			title : {
-				text: reduceSeqData[0].name,
-				subtext: '',
-				x:'center'
-            },
 			toolbox: barToolBox,
             
             tooltip : {
